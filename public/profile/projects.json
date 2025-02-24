@@ -1,150 +1,96 @@
 {
     "projects" : [
         {
-            "image" : "images/projects/portfolio-poster.png",
-            "title": "Dev Portfolio",
-            "bodyText": "- Developer Portfolio Website made in React\n -  Fully customisable and dynamic, easily change data and images.\n - Dark Mode Support",
+            "image" : "images/projects/freshup-ss.png",
+            "title": "Freshup (Saloon App)",
+            "bodyText": "- Barber App | Dart, Flutter, RESTful Api, Firebase, Hive (Caching)\n - Barber, Customer, and Admin access.\n - Allow users to register and log in securely.\n - Firebase authentication for user management.\n - Implement a Model-View-Controller (MVC) architecture for clean and organized code.\n - Display a list of barber services.\n - Retrieve service data from a RESTful API.\n - Implement local caching using Hive for improved app performance.\n - Implement a booking system for users to schedule appointments.\n - Advertisement Section, News Updates, and Super Advertisements.\n - Implement localization for multi-language support.\n - Online payment using Stripe.",
             "links": [
                 {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/dev-portfolio"
+                    "text": "AppStore",
+                    "href": "https://apps.apple.com/nz/app/freshup/id1668802018?platform=iphone"
+                }
+                
+            ],
+            "tags" : [
+                "Flutter",
+                "Caching",
+                "Stripe"
+            ]
+        },
+        {
+            "image" : "images/projects/unify.png",
+            "title": "Unify Experiences",
+            "bodyText": "- **Unify Experiences** | Dart, Flutter, RESTful API, Firebase, Deeplink\n  - **Authentication**: Firebase authentication for secure login and registration.\n  - **Messaging System**: Real-time chat functionality using Firebase Firestore.\n  - **Post and Stories Sharing**: Users can share posts and stories inside a room.\n  - **Items to Sell**: Upload items for selling inside a room if admin permission is granted.\n  - **Referrals**: Referral point system based on referral codes.\n  - **Deeplinking**: Deeplinks for sharing posts, profiles, and rooms.\n  - **Notification System**: Push notifications for new messages and activities.\n  - **User Management**: Firebase Cloud Firestore for managing user data and chats.",
+            "links": [
+                {
+                    "text": "Playstore",
+                    "href": "https://play.google.com/store/apps/details?id=com.unify.rooms"
                 },
                 {
-                    "text": "Live",
-                    "href": "https://mayankagarwal.me"
+                    "text": "Appstore",
+                    "href": "https://apps.apple.com/us/app/unify-experiences/id6523422163?ign-itscg=30200&ign-itsct=apps_box_link&mttnsubad=6523422163"
                 }
             ],
-            "tags" : [
-                "React",
-                "Portfolio",
-                "JavaScript"
-            ]
-        },
-        {
-            "image" : "images/projects/caaring-poster.png",
-            "title": "Caaring -  Cab Share App",
-            "bodyText": "- A Cab Sharing web app made using **Django** for **VIT** Students. People can create a new cab or request to join an existing cab.\n - Added User authentication and password reset using **SendGrid**.\n - Deployed on **heroku** using **gunicorn**.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/Caaring"
-                },
-                {
-                    "text": "Live",
-                    "href": "http://caaring.herokuapp.com"
-                }
-            ],
-            "tags" : [
-                "Python",
-                "Django",
-                "BootStrap",
-                "SendGrid",
-                "Heroku",
-                "Gunicorn",
-                "VIT"
-            ]
-        },
-        {
-            "image" : "images/projects/quiet-hours-poster.jpg",
-            "title": "Quiet Hours App",
-            "bodyText": "- An Android App that **automatically silences** your phone during class hours, designed for **VITians**.\n - Option to select class **slots** and **custom time**.\n - Option to put on Vibrate instead of Silent.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/QuietHours-Android"
-                }
-            ],
-            "tags" : [
-                "Java",
-                "Android",
-                "Alarm Manager",
-                "VIT"
-            ]
-        },
-        {
-            "title": "Secure Chat App",
-            "bodyText": "- An Android App that allows users to send texts in real time.\n - End to End encryption using **RSA** Algorithm.\n - Uses **Firebase** database to store texts.\n - Secured with **Fingerprint** lock.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/SecureChatApp"
-                }
-            ],
-            "tags" : [
-                "Java",
-                "Android",
+            "tags": [
+                "Flutter",
                 "Firebase",
-                "RSA"
+                "Deeplinking",
+                "Authentication",
+                "Real-time Chat",
+                "Push Notifications",
+                "User Management",
+                "Firestore"
             ]
+
+            
         },
         {
-            "title": "MVVM Sample App",
-            "bodyText": "- An Android App that loads data from mock API and show in both **LinearLayout** and **GridLayout RecyclerView**.\n - Offline support using **Room** DB and **NetworkBoundResource**.\n - Uses the **MVVM** architecture.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/mvvm-sample-app"
-                }
-            ],
+            "image" : "images/projects/Bextr.png",
+            "title": "Bextr (Influencer Hiring App)",
+            "bodyText": "- Bextr | Flutter, RESTful API, Firebase\n - A platform connecting influencers and brands for seamless collaborations.\n - Two user types: Influencers and Brands with tailored functionalities.\n - Brands can post detailed campaigns with budget and goals.\n - Influencers can explore campaigns and mark them as Interested or Not Interested.\n - Advanced filtering options based on follower size, country, niche, and more.\n - Influencers can apply for campaigns, and brands can review and accept offers.\n - Manage ongoing and completed collaborations in a dedicated section.\n - Supports multi-language accessibility with three languages.\n - Secure backend using Firebase for data management and authentication.\n - Real-time synchronization between brands and influencers for efficient communication.",
+           
             "tags" : [
-                "Kotlin",
-                "Android",
-                "MVVM",
-                "Room",
-                "Coroutines",
-                "Flow",
-                "Hilt-Dagger",
-                "NetworkBoundResource"
-            ]
+                "Flutter",
+                "Restful API",
+                "Multi Language"
+                ]
         },
         {
-            "title": "Feed List App",
-            "bodyText": "- An Android App that loads list of feeds from a **paginated** API and shows in a RecyclerView.\n - Uses the **MVVM** architecture.\n - Uses **Paging 3** library along with other Architecture Components.",
+            "image" : "images/projects/smatmed.jpeg",
+            "title": "SmartMed",
+            "bodyText": "- SmartMed | Machine Learning, Flutter, Firebase, Python\n - Machine learning-based disease diagnosis and medical service system.\n - Collect and analyze patient symptoms for accurate disease prediction.\n - Integrated smartwatch support for real-time health data monitoring.\n - Secure data storage and retrieval using Firebase.\n - User-friendly mobile app interface for patients and doctors.\n - Provide nearby hospital recommendations and appointment scheduling.\n - Implemented custom algorithms for symptom-based disease diagnosis.\n - Real-time data visualization for health monitoring.\n - Localization support for multi-language accessibility.",
             "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/Paginated-App-Feeds-List"
-                }
+               
             ],
             "tags" : [
-                "Kotlin",
-                "Android",
-                "MVVM",
-                "Paging 3",
-                "Coroutines",
-                "Flow"
-            ]
-        },
-        {
-            "title": "Task Tracker",
-            "bodyText": "- A simple Task Tracker web app made with **Angular 12**.\n - Uses **mock JSON server** to get, add, delete or update tasks.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/task-tracker-app"
-                }
-            ],
-            "tags" : [
-                "TypeScript",
-                "Angular 12",
-                "JavaScript"
-            ]
-        },
-        {
-            "title": "Image Encryption/Decryption",
-            "bodyText": "- A Web App for Image Encryption and Decryption made in **Django**.\n - Uses **SDES** algorithm for encryption/decryption.",
-            "links": [
-                {
-                    "text": "GitHub",
-                    "href": "https://github.com/mayankagarwal09/img-encrypt-sdes"
-                }
-            ],
-            "tags" : [
+                "Machine Learning",
+                "Flutter",
+                "Firebase",
                 "Python",
-                "Django",
-                "SDES",
-                "Cryptography"
+                "Maps",
+                "Smartwatch"
+            ]
+        },
+        {
+            "image" : "images/projects/trading.png",
+            "title": "Trading Journal",
+            "bodyText":"- My Trading Journal App | Android, MVVM, ROOMDB\n - A powerful trading journal app with Light and Dark theme support.\n - Built with MVVM architecture for maintainable and efficient code.\n - Local data storage using ROOMDB for offline functionality.\n - Key Features:\n - Excel Import: Effortlessly import trading data from Excel.\n - Monthly Reports: Analyze performance with insightful monthly summaries.\n - Session Profits: Interactive charts for visualizing session-wise profits and losses.\n - Export Options: Export journal entries to Excel or PDF for detailed analysis.\n - Weekday Statistics: Track and identify the most profitable trading days.\n - Session-Based Analysis: Detailed insights into session-specific performance.",
+            "links": [
+                {
+                    "text": "Demo",
+                    "href": "5"
+                }
+            ],
+            "tags" : [
+                "Java",
+                "Android",
+                "MVVM",
+                "RoomDB",
+                "Light theme",
+                "Dark theme",
+                "Trading Journal"
             ]
         }
+       
     ]
 }

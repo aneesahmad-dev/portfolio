@@ -1,6 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
-  Button, Card, Badge, Col,
+  Button,
+  Card,
+  Badge,
+  Col,
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { ThemeContext } from 'styled-components';
@@ -35,10 +38,12 @@ const styles = {
 
 const ProjectCard = (props) => {
   const theme = useContext(ThemeContext);
+  const [showFullText, setShowFullText] = useState(false);
   const parseBodyText = (text) => <ReactMarkdown children={text} />;
-
   const { project } = props;
-
+  const { bodyText } = project;
+  const toggleShowText = () => setShowFullText(!showFullText);
+  const previewText = bodyText.split('\n').slice(0, 3).join('\n');
   return (
     <Col>
       <Card
@@ -53,8 +58,11 @@ const ProjectCard = (props) => {
         <Card.Body>
           <Card.Title style={styles.cardTitleStyle}>{project.title}</Card.Title>
           <Card.Text style={styles.cardTextStyle}>
-            {parseBodyText(project.bodyText)}
+            {showFullText ? parseBodyText(bodyText) : parseBodyText(previewText)}
           </Card.Text>
+          <Button variant="link" onClick={toggleShowText} style={styles.buttonStyle}>
+            {showFullText ? 'Show Less' : 'Show More'}
+          </Button>
         </Card.Body>
 
         <Card.Body>

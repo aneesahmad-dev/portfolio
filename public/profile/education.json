@@ -1,19 +1,19 @@
 {
     "education":[
         {
-            "title": "Jun 20XX - Jun 20YY",
-            "cardTitle": "B.Tech, Computer Science",
-            "cardSubtitle":"XYZ University, City",
-            "cardDetailedText": "CGPA - 9.5",
+            "title": "Oct 2020 - Sep 2024",
+            "cardTitle": "BS Software Engineering",
+            "cardSubtitle":"Mirpur University of Science and Technology (MUST), Mirpur",
+            "cardDetailedText": "CGPA - 3.85",
             "icon" : {
-                "src": "images/education/lorem-ipsum.png"
+                "src": "images/education/must.png"
             }
         },
         {
-            "title": "Apr 20XX",
-            "cardTitle": "High School",
-            "cardSubtitle":"ABC School, City",
-            "cardDetailedText": "Marks - 95%"
+            "title": "Apr 2020",
+            "cardTitle": "Intermediate",
+            "cardSubtitle":"Govt. Higher Secondary School, Malal Attock",
+            "cardDetailedText": "Marks - 78%"
         }
     ]
 }

@@ -12,9 +12,11 @@ const styles = {
     margin: 10,
     flexDirection: 'column',
     whiteSpace: 'pre-wrap',
-    textAlign: 'left',
+    textAlign: 'justify', // Justified text alignment
     fontSize: '1.2em',
-    fontWeight: 500,
+    fontWeight: 300, // Lighter font weight
+    fontFamily: '"Roboto", "Arial", sans-serif', // Custom font family
+    lineHeight: '1.6', // Improved line height for readability
   },
   introImageContainer: {
     margin: 10,
@@ -48,20 +50,20 @@ function About(props) {
       <Header title={header} />
       <div className="section-content-container">
         <Container>
-          {data
-            ? (
-              <Fade>
-                <Row>
-                  <Col style={styles.introTextContainer}>
-                    {parseIntro(data.about)}
-                  </Col>
-                  <Col style={styles.introImageContainer}>
-                    <img src={data?.imageSource} alt="profile" />
-                  </Col>
-                </Row>
-              </Fade>
-            )
-            : <FallbackSpinner />}
+          {data ? (
+            <Fade>
+              <Row>
+                <Col style={styles.introTextContainer}>
+                  {parseIntro(data.about)}
+                </Col>
+                <Col style={styles.introImageContainer}>
+                  <img src={data?.imageSource} alt="profile" />
+                </Col>
+              </Row>
+            </Fade>
+          ) : (
+            <FallbackSpinner />
+          )}
         </Container>
       </div>
     </>

@@ -10,12 +10,12 @@
                     "title": "Java"
                 },
                 {
-                    "icon": "images/skills/php.png",
-                    "title": "PHP"
+                    "icon": "images/skills/dart.png",
+                    "title": "Dart"
                 },
                 {
-                    "icon": "images/skills/js.png",
-                    "title": "JavaScript"
+                    "icon": "images/skills/csharp.png",
+                    "title": "C#"
                 },
                 {
                     "icon": "images/skills/python.png",
@@ -34,13 +34,10 @@
                     "title": "Android"
                 },
                 {
-                    "icon": "images/skills/react.png",
-                    "title": "React"
-                },
-                {
-                    "icon": "images/skills/nodejs.png",
-                    "title": "Nodejs"
+                    "icon": "images/skills/flutter.png",
+                    "title": "Flutter"
                 }
+               
             ]
         },
         {
@@ -51,13 +48,14 @@
                     "title": "Android Studio"
                 },
                 {
-                    "icon": "images/skills/git.png",
-                    "title": "Git"
+                    "icon": "images/skills/xcode.png",
+                    "title": "XCode"
                 },
                 {
-                    "icon": "images/skills/docker.png",
-                    "title": "Docker"
+                    "icon": "images/skills/git.png",
+                    "title": "Git"
                 }
+               
             ]
     }
 ]}
