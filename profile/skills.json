@@ -6,23 +6,23 @@
             "items" : [
      
                 {
-                    "icon": "images/skills/java.png",
+                    "icon": "portfolio/images/skills/java.png",
                     "title": "Java"
                 },
                 {
-                    "icon": "images/skills/dart.png",
+                    "icon": "portfolio/images/skills/dart.png",
                     "title": "Dart"
                 },
                 {
-                    "icon": "images/skills/csharp.png",
+                    "icon": "portfolio/images/skills/csharp.png",
                     "title": "C#"
                 },
                 {
-                    "icon": "images/skills/python.png",
+                    "icon": "portfolio/images/skills/python.png",
                     "title": "Python"
                 },
                 {
-                    "icon": "images/skills/mysql.png",
+                    "icon": "portfolio/images/skills/mysql.png",
                     "title": "MySQL"
                 }
         ]},
@@ -30,11 +30,11 @@
             "title": "Frameworks & Technologies",
             "items" : [
                 {
-                    "icon": "images/skills/android_new.png",
+                    "icon": "portfolio/images/skills/android_new.png",
                     "title": "Android"
                 },
                 {
-                    "icon": "images/skills/flutter.png",
+                    "icon": "portfolio/images/skills/flutter.png",
                     "title": "Flutter"
                 }
                
@@ -44,15 +44,15 @@
             "title" : "Tools & Platforms",
             "items": [
                 {
-                    "icon": "images/skills/android-studio.png",
+                    "icon": "portfolio/images/skills/android-studio.png",
                     "title": "Android Studio"
                 },
                 {
-                    "icon": "images/skills/xcode.png",
+                    "icon": "portfolio/images/skills/xcode.png",
                     "title": "XCode"
                 },
                 {
-                    "icon": "images/skills/git.png",
+                    "icon": "portfolio/images/skills/git.png",
                     "title": "Git"
                 }
                
