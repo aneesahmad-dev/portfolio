@@ -1,0 +1,16 @@
+{
+    "social": [
+        {
+            "network" : "linkedin",
+            "href": "https://www.linkedin.com/in/anees-ahmad1/"
+        },
+        {
+            "network" : "github",
+            "href": "https://github.com/Anees004"
+        },
+        {
+            "network" : "email",
+            "href": "mailto:anees00423@gmail.com"
+        }
+    ]
+}

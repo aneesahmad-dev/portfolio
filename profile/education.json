@@ -1,0 +1,19 @@
+{
+    "education":[
+        {
+            "title": "Oct 2020 - Sep 2024",
+            "cardTitle": "BS Software Engineering",
+            "cardSubtitle":"Mirpur University of Science and Technology (MUST), Mirpur",
+            "cardDetailedText": "CGPA - 3.85",
+            "icon" : {
+                "src": "images/education/must.png"
+            }
+        },
+        {
+            "title": "Apr 2020",
+            "cardTitle": "Intermediate",
+            "cardSubtitle":"Govt. Higher Secondary School, Malal Attock",
+            "cardDetailedText": "Marks - 78%"
+        }
+    ]
+}
