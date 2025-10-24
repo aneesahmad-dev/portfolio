@@ -102,18 +102,42 @@ function handlePageLoad() {
   });
 }
 
-// Scroll Progress Indicator
+// Scroll Progress Indicator with Scroll Limit
 function initScrollProgress() {
   const progressBar = document.getElementById('scroll-progress');
   const backToTopBtn = document.getElementById('back-to-top');
   
   if (!progressBar) return;
 
+  let isScrollLocked = false;
+
   window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset;
     const docHeight = document.body.scrollHeight - window.innerHeight;
     const scrollPercent = (scrollTop / docHeight) * 100;
-    progressBar.style.width = scrollPercent + '%';
+    
+    // Cap the progress at 100%
+    const cappedPercent = Math.min(scrollPercent, 100);
+    progressBar.style.width = cappedPercent + '%';
+
+    // Add visual feedback when complete
+    if (cappedPercent >= 100) {
+      progressBar.classList.add('complete');
+    } else {
+      progressBar.classList.remove('complete');
+    }
+
+    // Lock scrolling when progress reaches 100%
+    if (scrollPercent >= 100 && !isScrollLocked) {
+      isScrollLocked = true;
+      // Immediately scroll back to the maximum allowed position
+      window.scrollTo({
+        top: docHeight,
+        behavior: 'smooth'
+      });
+    } else if (scrollPercent < 99) {
+      isScrollLocked = false;
+    }
 
     // Show/hide back to top button
     if (backToTopBtn) {
@@ -125,9 +149,27 @@ function initScrollProgress() {
     }
   });
 
+  // Prevent wheel scrolling when at 100%
+  window.addEventListener('wheel', (e) => {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    
+    // Prevent scrolling down when at 100%
+    if (scrollPercent >= 99 && e.deltaY > 0) {
+      e.preventDefault();
+      // Ensure we're exactly at the bottom
+      window.scrollTo({
+        top: docHeight,
+        behavior: 'smooth'
+      });
+    }
+  }, { passive: false });
+
   // Back to top functionality
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
+      isScrollLocked = false; // Allow scrolling when going back to top
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
