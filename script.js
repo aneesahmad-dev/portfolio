@@ -216,32 +216,16 @@ function initAdvancedFeatures() {
   }
 }
 
-// Initialize app when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Main initialization function
+function initializePortfolio() {
   new PortfolioApp();
   handlePageLoad();
   initScrollProgress();
   initAdvancedFeatures();
-});
-
-// Simple fade-in animations
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, observerOptions);
-
-// Initialize fade-in animations
-document.addEventListener('DOMContentLoaded', () => {
-  // Set initial state for sections but with a fallback
+  initTestimonialsToggle();
+  initMobileMenu();
+  
+  // Initialize fade-in animations
   document.querySelectorAll('section').forEach((section, index) => {
     // Don't hide the first section (hero) to prevent black screen
     if (index === 0) {
@@ -263,7 +247,41 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1000 + (index * 200));
     }
   });
-});
+  
+  // Initialize advanced features
+  if (typeof initAdvancedAnimations === 'function') initAdvancedAnimations();
+  if (typeof initPerformanceMonitoring === 'function') initPerformanceMonitoring();
+  if (typeof initKeyboardShortcuts === 'function') initKeyboardShortcuts();
+  if (typeof initThemeSystem === 'function') initThemeSystem();
+  if (typeof initErrorHandling === 'function') initErrorHandling();
+  
+  // Initialize particle system for larger screens
+  if (window.innerWidth > 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (typeof ParticleSystem === 'function') {
+      new ParticleSystem();
+    }
+  }
+}
+
+// Initialize app when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializePortfolio);
+
+// Simple fade-in animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+// Fade-in animations are now handled in main initialization
 
 // Testimonials Functionality
 window.toggleTestimonial = function(testimonialId) {
@@ -290,7 +308,10 @@ function initTestimonialsToggle() {
   const showMoreBtn = document.getElementById('show-more-testimonials');
   const container = document.querySelector('.testimonials-container');
   
-  if (!showMoreBtn || !container) return;
+  if (!showMoreBtn || !container) {
+    console.log('Testimonials elements not found');
+    return;
+  }
   
   let showingAll = false;
   
@@ -298,7 +319,7 @@ function initTestimonialsToggle() {
     e.preventDefault();
     
     if (showingAll) {
-      // Hide testimonials 3 and 4
+      // Hide additional testimonials
       container.classList.remove('show-all');
       showMoreBtn.textContent = 'Show All Testimonials';
       showingAll = false;
@@ -314,13 +335,13 @@ function initTestimonialsToggle() {
       showMoreBtn.textContent = 'Show Less Testimonials';
       showingAll = true;
     }
+    
+    console.log('Testimonials toggle - showing all:', showingAll);
+    console.log('Container classes:', container.className);
   });
 }
 
-// Initialize testimonials functionality
-document.addEventListener('DOMContentLoaded', () => {
-  initTestimonialsToggle();
-});
+// Testimonials initialization is now handled in main initialization
 
 // Mobile Menu Functionality
 function initMobileMenu() {
@@ -351,10 +372,7 @@ function initMobileMenu() {
   });
 }
 
-// Initialize mobile menu
-document.addEventListener('DOMContentLoaded', () => {
-  initMobileMenu();
-});
+// Mobile menu initialization is now handled in main initialization
 
 // Particle System for Background Effect
 class ParticleSystem {
@@ -501,19 +519,7 @@ function initErrorHandling() {
   });
 }
 
-// Initialize all advanced features
-document.addEventListener('DOMContentLoaded', () => {
-  // Only initialize particle system on larger screens for performance
-  if (window.innerWidth > 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    new ParticleSystem();
-  }
-  
-  initAdvancedAnimations();
-  initPerformanceMonitoring();
-  initKeyboardShortcuts();
-  initThemeSystem();
-  initErrorHandling();
-});
+// Advanced features initialization is now handled in main initialization
 
 // Service Worker Registration (for future PWA features)
 if ('serviceWorker' in navigator) {

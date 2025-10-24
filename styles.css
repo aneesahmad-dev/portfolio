@@ -967,15 +967,19 @@ h1, h2, h3 {
   padding: 0.75rem 2rem;
 }
 
-.testimonial-card[data-testimonial="3"],
-.testimonial-card[data-testimonial="4"] {
+/* Initially hide testimonials 3 and 4 */
+.testimonials-container .testimonial-card[data-testimonial="3"],
+.testimonials-container .testimonial-card[data-testimonial="4"] {
   display: none !important;
 }
 
+/* Show testimonials 3 and 4 when show-all class is added */
 .testimonials-container.show-all .testimonial-card[data-testimonial="3"],
 .testimonials-container.show-all .testimonial-card[data-testimonial="4"] {
   display: flex !important;
   animation: fadeInUp 0.6s ease forwards;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Project Tags */
