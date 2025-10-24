@@ -102,16 +102,90 @@ function handlePageLoad() {
   });
 }
 
+// Scroll Progress Indicator
+function initScrollProgress() {
+  const progressBar = document.getElementById('scroll-progress');
+  const backToTopBtn = document.getElementById('back-to-top');
+  
+  if (!progressBar) return;
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    progressBar.style.width = scrollPercent + '%';
+
+    // Show/hide back to top button
+    if (backToTopBtn) {
+      if (scrollTop > 300) {
+        backToTopBtn.classList.remove('hidden');
+      } else {
+        backToTopBtn.classList.add('hidden');
+      }
+    }
+  });
+
+  // Back to top functionality
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+}
+
+// Enhanced Animations and Interactions
+function initAdvancedFeatures() {
+  // Parallax effect for hero section
+  const hero = document.querySelector('section');
+  const crystal = document.querySelector('.data-crystal-container');
+  
+  if (hero && crystal) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const rate = scrolled * -0.5;
+      crystal.style.transform = `translateY(${rate}px)`;
+    });
+  }
+
+  // Add typing effect to hero text
+  const heroTitle = document.querySelector('h1');
+  if (heroTitle) {
+    const text = heroTitle.textContent;
+    heroTitle.textContent = '';
+    heroTitle.style.borderRight = '2px solid var(--accent-color)';
+    
+    let i = 0;
+    const typeWriter = () => {
+      if (i < text.length) {
+        heroTitle.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+      } else {
+        setTimeout(() => {
+          heroTitle.style.borderRight = 'none';
+        }, 1000);
+      }
+    };
+    
+    setTimeout(typeWriter, 1000);
+  }
+}
+
 // Initialize app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
   new PortfolioApp();
   handlePageLoad();
+  initScrollProgress();
+  initAdvancedFeatures();
 });
 
 // Simple fade-in animations
 const observerOptions = {
   threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
+  rootMargin: '0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -125,12 +199,27 @@ const observer = new IntersectionObserver((entries) => {
 
 // Initialize fade-in animations
 document.addEventListener('DOMContentLoaded', () => {
-  // Set initial state for sections
-  document.querySelectorAll('section').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(section);
+  // Set initial state for sections but with a fallback
+  document.querySelectorAll('section').forEach((section, index) => {
+    // Don't hide the first section (hero) to prevent black screen
+    if (index === 0) {
+      section.style.opacity = '1';
+      section.style.transform = 'translateY(0)';
+      section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    } else {
+      section.style.opacity = '0';
+      section.style.transform = 'translateY(20px)';
+      section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(section);
+      
+      // Fallback: Show sections after a delay if observer fails
+      setTimeout(() => {
+        if (section.style.opacity === '0') {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+        }
+      }, 1000 + (index * 200));
+    }
   });
 });
 
@@ -163,7 +252,9 @@ function initTestimonialsToggle() {
   
   let showingAll = false;
   
-  showMoreBtn.addEventListener('click', () => {
+  showMoreBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    
     if (showingAll) {
       // Hide testimonials 3 and 4
       container.classList.remove('show-all');
@@ -188,3 +279,206 @@ function initTestimonialsToggle() {
 document.addEventListener('DOMContentLoaded', () => {
   initTestimonialsToggle();
 });
+
+// Mobile Menu Functionality
+function initMobileMenu() {
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  if (!mobileMenuBtn || !mobileMenu) return;
+  
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('show');
+  });
+  
+  // Close menu when clicking on a link
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenuBtn.classList.remove('active');
+      mobileMenu.classList.remove('show');
+    });
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+      mobileMenuBtn.classList.remove('active');
+      mobileMenu.classList.remove('show');
+    }
+  });
+}
+
+// Initialize mobile menu
+document.addEventListener('DOMContentLoaded', () => {
+  initMobileMenu();
+});
+
+// Particle System for Background Effect
+class ParticleSystem {
+  constructor() {
+    this.particles = [];
+    this.maxParticles = 50;
+    this.init();
+  }
+
+  init() {
+    this.createParticles();
+    this.animate();
+  }
+
+  createParticles() {
+    for (let i = 0; i < this.maxParticles; i++) {
+      this.createParticle();
+    }
+  }
+
+  createParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 20 + 's';
+    particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+    document.body.appendChild(particle);
+    
+    this.particles.push(particle);
+    
+    // Remove particle after animation
+    setTimeout(() => {
+      if (particle.parentNode) {
+        particle.parentNode.removeChild(particle);
+      }
+      const index = this.particles.indexOf(particle);
+      if (index > -1) {
+        this.particles.splice(index, 1);
+      }
+    }, 25000);
+  }
+
+  animate() {
+    // Create new particles periodically
+    setInterval(() => {
+      if (this.particles.length < this.maxParticles) {
+        this.createParticle();
+      }
+    }, 2000);
+  }
+}
+
+// Enhanced Intersection Observer for Animations
+function initAdvancedAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const animationObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        
+        // Special handling for different elements
+        if (entry.target.classList.contains('skill-tag')) {
+          entry.target.style.animationPlayState = 'running';
+        }
+        
+        if (entry.target.classList.contains('timeline-item')) {
+          entry.target.style.animationPlayState = 'running';
+        }
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements for animation
+  document.querySelectorAll('.skill-tag, .timeline-item, .project-card, .testimonial-card, .education-card').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    animationObserver.observe(el);
+  });
+}
+
+// Performance Monitoring
+function initPerformanceMonitoring() {
+  // Monitor page load performance
+  window.addEventListener('load', () => {
+    const perfData = performance.getEntriesByType('navigation')[0];
+    console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+    
+    // Log Core Web Vitals if available
+    if ('web-vital' in window) {
+      // This would integrate with web-vitals library if included
+    }
+  });
+}
+
+// Keyboard Shortcuts
+function initKeyboardShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    // Alt + H: Go to home/top
+    if (e.altKey && e.key === 'h') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Alt + P: Go to projects
+    if (e.altKey && e.key === 'p') {
+      e.preventDefault();
+      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Alt + C: Go to contact
+    if (e.altKey && e.key === 'c') {
+      e.preventDefault();
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Alt + A: Go to about
+    if (e.altKey && e.key === 'a') {
+      e.preventDefault();
+      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+}
+
+// Theme Persistence (for future dark/light mode toggle)
+function initThemeSystem() {
+  // Check for saved theme preference or default to dark
+  const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+// Enhanced Error Handling
+function initErrorHandling() {
+  window.addEventListener('error', (e) => {
+    console.error('Portfolio Error:', e.error);
+    // Could send to analytics service in production
+  });
+
+  window.addEventListener('unhandledrejection', (e) => {
+    console.error('Unhandled Promise Rejection:', e.reason);
+    // Could send to analytics service in production
+  });
+}
+
+// Initialize all advanced features
+document.addEventListener('DOMContentLoaded', () => {
+  // Only initialize particle system on larger screens for performance
+  if (window.innerWidth > 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    new ParticleSystem();
+  }
+  
+  initAdvancedAnimations();
+  initPerformanceMonitoring();
+  initKeyboardShortcuts();
+  initThemeSystem();
+  initErrorHandling();
+});
+
+// Service Worker Registration (for future PWA features)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    // navigator.serviceWorker.register('/sw.js')
+    //   .then(registration => console.log('SW registered'))
+    //   .catch(error => console.log('SW registration failed'));
+  });
+}
+
