@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Inconsolata:wght@400;700&display=swap');
 
+/* Ensure font-display: swap for all fonts */
+@font-face {
+  font-family: 'Cutive Mono';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-display: swap;
+}
+
 /* Base Styles */
 :root {
   --bg-primary: #0d0d0d;
@@ -147,6 +158,7 @@ h1, h2, h3 {
   position: relative;
   transform-style: preserve-3d;
   animation: rotateY 30s linear infinite;
+  will-change: transform; /* Optimize for animation */
 }
 
 .face {
@@ -209,6 +221,7 @@ h1, h2, h3 {
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  will-change: transform, box-shadow; /* Optimize for hover animations */
 }
 
 .project-card::before {
@@ -224,10 +237,8 @@ h1, h2, h3 {
 
 .project-card:hover {
   border-color: #9ca3af;
-  transform: translateY(-8px);
-  box-shadow: 
-    0 10px 25px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px); /* Reduced movement */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Simplified shadow */
   background: rgba(0, 0, 0, 0.4);
 }
 
@@ -1030,6 +1041,20 @@ section h2::after {
   position: relative;
 }
 
+/* Animation control classes */
+.animation-paused {
+  animation-play-state: paused;
+}
+
+.animation-running {
+  animation-play-state: running;
+}
+
+.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
@@ -1134,8 +1159,13 @@ textarea:focus-visible {
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
-/* Smooth Transitions */
-* {
+/* Optimized Transitions - only on elements that need them */
+.nav-link,
+.classic-button,
+.project-card,
+.testimonial-card,
+.skill-tag,
+.timeline-content {
   transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1429,29 +1459,22 @@ html {
 body {
   overscroll-behavior-y: contain;
 }
-/* ===== OLD WEATHERED PIN BOARD ===== */
+/* ===== OLD WEATHERED PIN BOARD - OPTIMIZED ===== */
 .terminal-memory-board {
   position: relative;
   min-height: 800px;
   background: 
-    /* Dark weathered cork texture */
+    /* Simplified cork texture - fewer gradients */
     radial-gradient(circle at 25% 25%, #3d2914 1px, transparent 1px),
     radial-gradient(circle at 75% 75%, #4a3319 1px, transparent 1px),
-    radial-gradient(circle at 50% 10%, #2d1f0f 0.5px, transparent 0.5px),
-    radial-gradient(circle at 10% 90%, #3d2914 0.5px, transparent 0.5px),
-    radial-gradient(circle at 80% 40%, #4a3319 0.8px, transparent 0.8px),
-    radial-gradient(circle at 15% 60%, #2d1f0f 0.6px, transparent 0.6px),
-    /* Additional weathering spots */
-    radial-gradient(circle at 30% 70%, #1a1a1a 2px, transparent 2px),
-    radial-gradient(circle at 85% 15%, #2a2a2a 1.5px, transparent 1.5px);
-  background-color: #6b5b47; /* More natural cork brown */
-  background-size: 20px 20px, 25px 25px, 15px 15px, 18px 18px, 22px 22px, 16px 16px, 40px 40px, 35px 35px;
+    radial-gradient(circle at 30% 70%, #1a1a1a 2px, transparent 2px);
+  background-color: #6b5b47;
+  background-size: 20px 20px, 25px 25px, 40px 40px;
   border: 12px solid #2d1f0f;
   border-radius: 0;
   padding: 2rem;
   overflow: hidden;
-  box-shadow: 
-    0 15px 30px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); /* Reduced shadow complexity */
 }
 
 .crt-overlay {
@@ -1461,14 +1484,9 @@ body {
   right: 0;
   bottom: 0;
   background: 
-    /* Natural random stains - not centered */
-    radial-gradient(circle at 15% 80%, rgba(0,0,0,0.08) 0%, transparent 25%),
-    radial-gradient(circle at 85% 25%, rgba(0,0,0,0.06) 0%, transparent 20%),
-    radial-gradient(circle at 40% 15%, rgba(45,31,15,0.05) 0%, transparent 18%),
-    radial-gradient(circle at 75% 90%, rgba(0,0,0,0.04) 0%, transparent 15%),
-    /* Subtle grain texture */
-    repeating-conic-gradient(from 0deg, transparent 0deg, rgba(0,0,0,0.03) 1deg, transparent 2deg),
-    repeating-linear-gradient(45deg, transparent 0px, rgba(45,31,15,0.02) 1px, transparent 4px);
+    /* Simplified stains - fewer gradients */
+    radial-gradient(circle at 15% 80%, rgba(0,0,0,0.06) 0%, transparent 25%),
+    radial-gradient(circle at 85% 25%, rgba(0,0,0,0.04) 0%, transparent 20%);
   pointer-events: none;
   z-index: 1;
 }
@@ -1480,20 +1498,13 @@ body {
   right: 0;
   bottom: 0;
   background: 
-    /* Very subtle texture - no obvious patterns */
+    /* Single subtle texture */
     repeating-linear-gradient(
       0deg,
       transparent,
-      transparent 6px,
-      rgba(0, 0, 0, 0.015) 6px,
-      rgba(0, 0, 0, 0.015) 7px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent,
       transparent 8px,
-      rgba(45, 31, 15, 0.01) 8px,
-      rgba(45, 31, 15, 0.01) 9px
+      rgba(0, 0, 0, 0.01) 8px,
+      rgba(0, 0, 0, 0.01) 9px
     );
   pointer-events: none;
   z-index: 2;
@@ -1534,27 +1545,17 @@ body {
   height: auto;
   display: block;
   
-  /* Heavy vintage aging for old pin board feel */
+  /* Simplified vintage aging - fewer filters */
   filter: 
     grayscale(100%) 
-    sepia(35%) 
-    contrast(1.3) 
-    brightness(0.75) 
-    saturate(0.6)
-    hue-rotate(15deg)
-    blur(0.4px);
+    sepia(25%) 
+    contrast(1.2) 
+    brightness(0.8);
   
-  /* Heavy film grain and dust overlay */
+  /* Simplified aging overlay */
   background: 
-    /* Age spots */
-    radial-gradient(circle at 15% 25%, rgba(0,0,0,0.1) 0%, transparent 20%),
-    radial-gradient(circle at 85% 75%, rgba(0,0,0,0.08) 0%, transparent 15%),
-    /* Film grain */
-    repeating-conic-gradient(from 0deg, transparent 0deg, rgba(0,0,0,0.06) 1deg, transparent 2deg),
-    repeating-linear-gradient(0deg, transparent 0px, rgba(0,0,0,0.04) 1px, transparent 2px),
-    repeating-linear-gradient(90deg, transparent 0px, rgba(45,31,15,0.03) 1px, transparent 3px);
+    radial-gradient(circle at 15% 25%, rgba(0,0,0,0.08) 0%, transparent 20%);
   
-  /* Additional aging overlay */
   position: relative;
 }
 

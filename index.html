@@ -15,17 +15,19 @@
     
     <title>Anees Ahmad | Software Architect & Mobile Developer Portfolio</title>
     
-    <!-- Preload critical resources -->
+    <!-- Font optimization -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Inconsolata:wght@400;700&display=swap" as="style">
+    
+    <!-- Critical resources -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="script.js" as="script">
     
     <!-- Performance and SEO -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
     
     <!-- Stylesheets -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
     <link rel="stylesheet" href="styles.css">
     
     <!-- Structured Data for SEO -->
@@ -128,7 +130,7 @@
             <!-- Left Side: Photo and Quick Info -->
             <div class="lg:w-1/3">
                 <div class="profile-card">
-                    <img src="assets/profile_old.png" alt="Anees Ahmad - Software Architect" class="profile-image">
+                    <img src="assets/profile_old.png" alt="Anees Ahmad - Software Architect" class="profile-image" loading="lazy">
                     <div class="profile-overlay">
                         <!-- <h3 class="profile-name">Anees Ahmad</h3>
                         <p class="profile-role">Flutter Developer & Software Architect</p>
@@ -347,7 +349,7 @@
             <!-- Row 1: Top certificates -->
             <!-- Stanford CIP 2024 -->
             <div class="terminal-photo" data-achievement="stanford-2024" style="top: 20px; left: 40px; transform: rotate(-1deg);">
-                <img src="assets/CIP24.png" alt="Stanford Code in Place 2024" class="terminal-image">
+                <img src="assets/CIP24.png" alt="Stanford Code in Place 2024" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">Stanford Code in Place '24</span>
                     <span class="file-desc">Section Leader</span>
@@ -356,7 +358,7 @@
 
             <!-- TECHTRONIX Certificate -->
             <div class="terminal-photo" data-achievement="techtronix-cert" style="top: 20px; left: 300px; transform: rotate(1deg);">
-                <img src="assets/techtronix_certificate.png" alt="TECHTRONIX 1st Place Certificate" class="terminal-image">
+                <img src="assets/techtronix_certificate.png" alt="TECHTRONIX 1st Place Certificate" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">TECHTRONIX '22</span>
                     <span class="file-desc">1st Place - Speed Programming</span>
@@ -365,7 +367,7 @@
 
             <!-- TECHTRONIX Group Photo -->
             <div class="terminal-photo" data-achievement="techtronix-group" style="top: 20px; right: 40px; transform: rotate(-1deg);">
-                <img src="assets/techtronix_group_photo.jpeg" alt="TECHTRONIX Group Photo" class="terminal-image">
+                <img src="assets/techtronix_group_photo.jpeg" alt="TECHTRONIX Group Photo" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">Victory moment at TECHTRONIX</span>
                     <span class="file-desc">National Competition</span>
@@ -375,7 +377,7 @@
             <!-- Row 2: Left side stack -->
             <!-- Confiniti MUST -->
             <div class="terminal-photo" data-achievement="confiniti" style="top: 240px; left: 60px; transform: rotate(1deg);">
-                <img src="assets/confiniti_must.png" alt="Confiniti MUST" class="terminal-image">
+                <img src="assets/confiniti_must.png" alt="Confiniti MUST" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">Confiniti MUST</span>
                     <span class="file-desc">Technical Excellence</span>
@@ -384,7 +386,7 @@
 
             <!-- GDSC Tech Lead -->
             <div class="terminal-photo" data-achievement="gdsc-lead" style="top: 420px; left: 40px; transform: rotate(-1deg);">
-                <img src="assets/gdsc_tech_lead_cert.png" alt="GDSC Technical Lead" class="terminal-image">
+                <img src="assets/gdsc_tech_lead_cert.png" alt="GDSC Technical Lead" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">GDSC Technical Lead</span>
                     <span class="file-desc">Google Developer Student Clubs</span>
@@ -394,7 +396,7 @@
             <!-- Row 2: Center -->
             <!-- Stanford CIP 2025 -->
             <div class="terminal-photo" data-achievement="stanford-2025" style="top: 260px; left: 320px; transform: rotate(1deg);">
-                <img src="assets/CIP25.png" alt="Stanford Code in Place 2025" class="terminal-image">
+                <img src="assets/CIP25.png" alt="Stanford Code in Place 2025" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">Stanford CIP '25</span>
                     <span class="file-desc">Section Leader - 2nd Year</span>
@@ -404,7 +406,7 @@
             <!-- Row 2: Right side stack -->
             <!-- President Certificate -->
             <div class="terminal-photo" data-achievement="president-cert" style="top: 240px; right: 40px; transform: rotate(-1deg);">
-                <img src="assets/ajk_presdient_cert.jpeg" alt="President Certificate" class="terminal-image">
+                <img src="assets/ajk_presdient_cert.jpeg" alt="President Certificate" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">University Recognition</span>
                     <span class="file-desc">Representing MUST Nationally</span>
@@ -413,7 +415,7 @@
 
             <!-- PEC Funding Receipt Photo -->
             <div class="terminal-photo" data-achievement="pec-funding" style="top: 420px; right: 40px; transform: rotate(-1deg);">
-                <img src="assets/pec_funding_amount_rec_photo.png" alt="PEC Funding Receipt" class="terminal-image">
+                <img src="assets/pec_funding_amount_rec_photo.png" alt="PEC Funding Receipt" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">P.E.C Funded Project</span>
                     <span class="file-desc">Innovation & Recognition</span>
@@ -423,7 +425,7 @@
             <!-- Row 4: Bottom row -->
             <!-- PEC FYP Certificate -->
             <div class="terminal-photo" data-achievement="pec-fyp" style="top: 600px; left: 160px; transform: rotate(1deg);">
-                <img src="assets/pec_funded_fyp.jpeg" alt="PEC Funded FYP" class="terminal-image">
+                <img src="assets/pec_funded_fyp.jpeg" alt="PEC Funded FYP" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">PEC FYP Certificate</span>
                     <span class="file-desc">Innovation Award</span>
@@ -432,7 +434,7 @@
 
             <!-- President Appreciation Certificate -->
             <div class="terminal-photo" data-achievement="president-appreciation" style="top: 580px; right: 160px; transform: rotate(-1deg);">
-                <img src="assets/cert_of_appreciation_president_AJK.png" alt="President Appreciation Certificate" class="terminal-image">
+                <img src="assets/cert_of_appreciation_president_AJK.png" alt="President Appreciation Certificate" class="terminal-image" loading="lazy">
                 <div class="terminal-label">
                     <span class="file-name">Presidential Appreciation</span>
                     <span class="file-desc">AJK Recognition</span>
@@ -728,7 +730,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 
 </body>
 </html>

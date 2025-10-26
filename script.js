@@ -1,6 +1,13 @@
-// Portfolio Interactive Features
+// Portfolio Interactive Features - optimized with element caching
 class PortfolioApp {
   constructor() {
+    // Cache DOM elements to avoid repeated queries
+    this.elements = {
+      contactForm: document.getElementById('contact-form'),
+      messageStatus: document.getElementById('message-status'),
+      smoothScrollLinks: document.querySelectorAll('a[href^="#"]')
+    };
+    
     this.init();
   }
 
@@ -11,8 +18,7 @@ class PortfolioApp {
   }
 
   setupContactForm() {
-    const contactForm = document.getElementById('contact-form');
-    const messageStatus = document.getElementById('message-status');
+    const { contactForm, messageStatus } = this.elements;
 
     if (!contactForm || !messageStatus) return;
 
@@ -59,7 +65,7 @@ class PortfolioApp {
   }
 
   setupSmoothScrolling() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    this.elements.smoothScrollLinks.forEach(anchor => {
       anchor.addEventListener('click', (e) => {
         e.preventDefault();
         const target = document.querySelector(anchor.getAttribute('href'));
@@ -102,7 +108,7 @@ function handlePageLoad() {
   });
 }
 
-// Scroll Progress Indicator with Scroll Limit
+// Optimized Scroll Progress Indicator with throttling
 function initScrollProgress() {
   const progressBar = document.getElementById('scroll-progress');
   const backToTopBtn = document.getElementById('back-to-top');
@@ -110,27 +116,40 @@ function initScrollProgress() {
   if (!progressBar) return;
 
   let isScrollLocked = false;
+  let ticking = false;
 
-  window.addEventListener('scroll', () => {
+  const updateScrollProgress = () => {
     const scrollTop = window.pageYOffset;
     const docHeight = document.body.scrollHeight - window.innerHeight;
     const scrollPercent = (scrollTop / docHeight) * 100;
     
     // Cap the progress at 100%
     const cappedPercent = Math.min(scrollPercent, 100);
-    progressBar.style.width = cappedPercent + '%';
+    
+    // Batch DOM updates
+    requestAnimationFrame(() => {
+      progressBar.style.width = cappedPercent + '%';
 
-    // Add visual feedback when complete
-    if (cappedPercent >= 100) {
-      progressBar.classList.add('complete');
-    } else {
-      progressBar.classList.remove('complete');
-    }
+      // Add visual feedback when complete
+      if (cappedPercent >= 100) {
+        progressBar.classList.add('complete');
+      } else {
+        progressBar.classList.remove('complete');
+      }
+
+      // Show/hide back to top button
+      if (backToTopBtn) {
+        if (scrollTop > 300) {
+          backToTopBtn.classList.remove('hidden');
+        } else {
+          backToTopBtn.classList.add('hidden');
+        }
+      }
+    });
 
     // Lock scrolling when progress reaches 100%
     if (scrollPercent >= 100 && !isScrollLocked) {
       isScrollLocked = true;
-      // Immediately scroll back to the maximum allowed position
       window.scrollTo({
         top: docHeight,
         behavior: 'smooth'
@@ -138,16 +157,16 @@ function initScrollProgress() {
     } else if (scrollPercent < 99) {
       isScrollLocked = false;
     }
+    
+    ticking = false;
+  };
 
-    // Show/hide back to top button
-    if (backToTopBtn) {
-      if (scrollTop > 300) {
-        backToTopBtn.classList.remove('hidden');
-      } else {
-        backToTopBtn.classList.add('hidden');
-      }
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateScrollProgress);
+      ticking = true;
     }
-  });
+  }, { passive: true });
 
   // Prevent wheel scrolling when at 100%
   window.addEventListener('wheel', (e) => {
@@ -178,94 +197,181 @@ function initScrollProgress() {
   }
 }
 
-// Enhanced Animations and Interactions
+// Enhanced Animations and Interactions - optimized for performance
 function initAdvancedFeatures() {
-  // Parallax effect for hero section
+  // Throttled parallax effect
   const hero = document.querySelector('section');
   const crystal = document.querySelector('.data-crystal-container');
   
   if (hero && crystal) {
-    window.addEventListener('scroll', () => {
+    let ticking = false;
+    
+    const updateParallax = () => {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -0.5;
       crystal.style.transform = `translateY(${rate}px)`;
+      ticking = false;
+    };
+    
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
     });
   }
 
-  // Add typing effect to hero text
+  // Non-blocking typewriter effect
   const heroTitle = document.querySelector('h1');
-  if (heroTitle) {
+  if (heroTitle && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const text = heroTitle.textContent;
     heroTitle.textContent = '';
     heroTitle.style.borderRight = '2px solid var(--accent-color)';
     
     let i = 0;
-    const typeWriter = () => {
-      if (i < text.length) {
+    
+    const typeWriter = async () => {
+      while (i < text.length) {
         heroTitle.textContent += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 100);
-      } else {
-        setTimeout(() => {
-          heroTitle.style.borderRight = 'none';
-        }, 1000);
+        
+        // Yield to browser every few characters
+        if (i % 3 === 0) {
+          await new Promise(resolve => setTimeout(resolve, 50));
+        }
       }
+      
+      setTimeout(() => {
+        heroTitle.style.borderRight = 'none';
+      }, 1000);
     };
     
-    setTimeout(typeWriter, 1000);
+    // Start after a delay
+    setTimeout(typeWriter, 1500);
   }
 }
 
-// Main initialization function
-function initializePortfolio() {
-  new PortfolioApp();
+// Critical initialization - runs immediately
+function initCritical() {
+  // Only essential features for first paint
+  initMobileMenu();
   handlePageLoad();
   initScrollProgress();
-  initAdvancedFeatures();
-  initTestimonialsToggle();
-  initAchievementGallery();
-  initMobileMenu();
   
-  // Initialize fade-in animations
-  document.querySelectorAll('section').forEach((section, index) => {
-    // Don't hide the first section (hero) to prevent black screen
-    if (index === 0) {
-      section.style.opacity = '1';
-      section.style.transform = 'translateY(0)';
-      section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    } else {
-      section.style.opacity = '0';
-      section.style.transform = 'translateY(20px)';
-      section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(section);
-      
-      // Fallback: Show sections after a delay if observer fails
-      setTimeout(() => {
-        if (section.style.opacity === '0') {
-          section.style.opacity = '1';
-          section.style.transform = 'translateY(0)';
-        }
-      }, 1000 + (index * 200));
-    }
-  });
-  
-  // Initialize advanced features
-  if (typeof initAdvancedAnimations === 'function') initAdvancedAnimations();
-  if (typeof initPerformanceMonitoring === 'function') initPerformanceMonitoring();
-  if (typeof initKeyboardShortcuts === 'function') initKeyboardShortcuts();
-  if (typeof initThemeSystem === 'function') initThemeSystem();
-  if (typeof initErrorHandling === 'function') initErrorHandling();
-  
-  // Initialize particle system for larger screens
-  if (window.innerWidth > 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    if (typeof ParticleSystem === 'function') {
-      new ParticleSystem();
-    }
+  // Show hero section immediately
+  const heroSection = document.querySelector('section');
+  if (heroSection) {
+    heroSection.style.opacity = '1';
+    heroSection.style.transform = 'translateY(0)';
+    heroSection.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
   }
 }
 
-// Initialize app when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializePortfolio);
+// Non-critical initialization - deferred
+function initEnhancements() {
+  return new Promise((resolve) => {
+    // Split into smaller chunks to avoid long tasks
+    const tasks = [
+      () => new PortfolioApp(),
+      () => initTestimonialsToggle(),
+      () => initAchievementGallery(),
+      () => initFadeInAnimations(),
+      () => initAdvancedFeatures()
+    ];
+    
+    let taskIndex = 0;
+    
+    function runNextTask() {
+      if (taskIndex >= tasks.length) {
+        resolve();
+        return;
+      }
+      
+      try {
+        tasks[taskIndex]();
+      } catch (error) {
+        console.error('Task failed:', error);
+      }
+      
+      taskIndex++;
+      
+      // Yield to browser between tasks
+      if (taskIndex < tasks.length) {
+        setTimeout(runNextTask, 0);
+      } else {
+        resolve();
+      }
+    }
+    
+    runNextTask();
+  });
+}
+
+// Fade-in animations separated
+function initFadeInAnimations() {
+  document.querySelectorAll('section').forEach((section, index) => {
+    if (index === 0) return; // Skip hero section
+    
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(section);
+    
+    // Fallback with staggered timing
+    setTimeout(() => {
+      if (section.style.opacity === '0') {
+        section.style.opacity = '1';
+        section.style.transform = 'translateY(0)';
+      }
+    }, 500 + (index * 100));
+  });
+}
+
+// Advanced features - lowest priority
+function initAdvancedFeatures() {
+  // Use requestIdleCallback if available
+  const runAdvanced = () => {
+    if (typeof initAdvancedAnimations === 'function') initAdvancedAnimations();
+    if (typeof initPerformanceMonitoring === 'function') initPerformanceMonitoring();
+    if (typeof initKeyboardShortcuts === 'function') initKeyboardShortcuts();
+    if (typeof initThemeSystem === 'function') initThemeSystem();
+    if (typeof initErrorHandling === 'function') initErrorHandling();
+    
+    // Particle system only for large screens and no reduced motion
+    if (window.innerWidth > 768 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (typeof ParticleSystem === 'function') {
+        setTimeout(() => new ParticleSystem(), 1000);
+      }
+    }
+  };
+  
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(runAdvanced, { timeout: 2000 });
+  } else {
+    setTimeout(runAdvanced, 1000);
+  }
+}
+
+// Main initialization
+document.addEventListener('DOMContentLoaded', initCritical);
+
+// Enhanced initialization after load
+window.addEventListener('load', () => {
+  // Use requestIdleCallback for non-critical features
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      initEnhancements().then(() => {
+        console.log('Portfolio fully initialized');
+      });
+    }, { timeout: 1000 });
+  } else {
+    setTimeout(() => {
+      initEnhancements().then(() => {
+        console.log('Portfolio fully initialized');
+      });
+    }, 100);
+  }
+});
 
 // Simple fade-in animations
 const observerOptions = {
@@ -375,23 +481,36 @@ function initMobileMenu() {
 
 // Mobile menu initialization is now handled in main initialization
 
-// Particle System for Background Effect
+// Optimized Particle System - reduced resource usage
 class ParticleSystem {
   constructor() {
     this.particles = [];
-    this.maxParticles = 50;
+    this.maxParticles = 20; // Reduced from 50
+    this.isVisible = true;
     this.init();
   }
 
   init() {
-    this.createParticles();
+    // Check if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+    
+    // Use document fragment for better performance
+    this.createInitialParticles();
+    this.setupVisibilityHandling();
     this.animate();
   }
 
-  createParticles() {
+  createInitialParticles() {
+    const fragment = document.createDocumentFragment();
+    
     for (let i = 0; i < this.maxParticles; i++) {
-      this.createParticle();
+      const particle = this.createParticle();
+      fragment.appendChild(particle);
     }
+    
+    document.body.appendChild(fragment);
   }
 
   createParticle() {
@@ -400,33 +519,49 @@ class ParticleSystem {
     particle.style.left = Math.random() * 100 + '%';
     particle.style.animationDelay = Math.random() * 20 + 's';
     particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-    document.body.appendChild(particle);
     
     this.particles.push(particle);
     
-    // Remove particle after animation
+    // Clean up after animation
     setTimeout(() => {
-      if (particle.parentNode) {
-        particle.parentNode.removeChild(particle);
-      }
-      const index = this.particles.indexOf(particle);
-      if (index > -1) {
-        this.particles.splice(index, 1);
-      }
+      this.removeParticle(particle);
     }, 25000);
+    
+    return particle;
+  }
+
+  removeParticle(particle) {
+    if (particle.parentNode) {
+      particle.parentNode.removeChild(particle);
+    }
+    const index = this.particles.indexOf(particle);
+    if (index > -1) {
+      this.particles.splice(index, 1);
+    }
+  }
+
+  setupVisibilityHandling() {
+    // Pause particles when tab is not visible
+    document.addEventListener('visibilitychange', () => {
+      this.isVisible = !document.hidden;
+      this.particles.forEach(particle => {
+        particle.style.animationPlayState = this.isVisible ? 'running' : 'paused';
+      });
+    });
   }
 
   animate() {
-    // Create new particles periodically
+    // Reduced frequency - create new particles less often
     setInterval(() => {
-      if (this.particles.length < this.maxParticles) {
-        this.createParticle();
+      if (this.isVisible && this.particles.length < this.maxParticles) {
+        const particle = this.createParticle();
+        document.body.appendChild(particle);
       }
-    }, 2000);
+    }, 4000); // Increased from 2000ms
   }
 }
 
-// Enhanced Intersection Observer for Animations
+// Enhanced Intersection Observer for Animations - optimized
 function initAdvancedAnimations() {
   const observerOptions = {
     threshold: 0.1,
@@ -434,40 +569,80 @@ function initAdvancedAnimations() {
   };
 
   const animationObserver = new IntersectionObserver((entries) => {
+    // Batch DOM updates
+    const updates = [];
+    
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        
-        // Special handling for different elements
-        if (entry.target.classList.contains('skill-tag')) {
-          entry.target.style.animationPlayState = 'running';
-        }
-        
-        if (entry.target.classList.contains('timeline-item')) {
-          entry.target.style.animationPlayState = 'running';
-        }
+        updates.push(() => {
+          entry.target.classList.add('animate-in');
+          
+          // Use CSS classes instead of direct style manipulation
+          if (entry.target.classList.contains('skill-tag')) {
+            entry.target.classList.add('animation-running');
+          }
+          
+          if (entry.target.classList.contains('timeline-item')) {
+            entry.target.classList.add('animation-running');
+          }
+        });
       }
     });
+    
+    // Apply all updates in one frame
+    if (updates.length > 0) {
+      requestAnimationFrame(() => {
+        updates.forEach(update => update());
+      });
+    }
   }, observerOptions);
 
-  // Observe elements for animation
-  document.querySelectorAll('.skill-tag, .timeline-item, .project-card, .testimonial-card, .education-card').forEach(el => {
-    el.style.animationPlayState = 'paused';
-    animationObserver.observe(el);
+  // Batch element observation
+  requestAnimationFrame(() => {
+    const elements = document.querySelectorAll('.skill-tag, .timeline-item, .project-card, .testimonial-card, .education-card');
+    elements.forEach(el => {
+      el.classList.add('animation-paused');
+      animationObserver.observe(el);
+    });
   });
 }
 
-// Performance Monitoring
+// Enhanced Performance Monitoring
 function initPerformanceMonitoring() {
   // Monitor page load performance
   window.addEventListener('load', () => {
-    const perfData = performance.getEntriesByType('navigation')[0];
-    console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
-    
-    // Log Core Web Vitals if available
-    if ('web-vital' in window) {
-      // This would integrate with web-vitals library if included
-    }
+    setTimeout(() => {
+      const perfData = performance.getEntriesByType('navigation')[0];
+      const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
+      const domContentLoaded = perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart;
+      const firstPaint = performance.getEntriesByType('paint').find(entry => entry.name === 'first-paint');
+      const firstContentfulPaint = performance.getEntriesByType('paint').find(entry => entry.name === 'first-contentful-paint');
+      
+      console.group('🚀 Portfolio Performance Metrics');
+      console.log('📊 Page Load Time:', loadTime.toFixed(2), 'ms');
+      console.log('📊 DOM Content Loaded:', domContentLoaded.toFixed(2), 'ms');
+      if (firstPaint) console.log('🎨 First Paint:', firstPaint.startTime.toFixed(2), 'ms');
+      if (firstContentfulPaint) console.log('🎨 First Contentful Paint:', firstContentfulPaint.startTime.toFixed(2), 'ms');
+      
+      // Monitor long tasks (potential TBT contributors)
+      if ('PerformanceObserver' in window) {
+        const longTaskObserver = new PerformanceObserver((list) => {
+          list.getEntries().forEach((entry) => {
+            if (entry.duration > 50) {
+              console.warn('⚠️ Long Task detected:', entry.duration.toFixed(2), 'ms');
+            }
+          });
+        });
+        
+        try {
+          longTaskObserver.observe({ entryTypes: ['longtask'] });
+        } catch (e) {
+          console.log('Long task monitoring not supported');
+        }
+      }
+      
+      console.groupEnd();
+    }, 1000);
   });
 }
 
