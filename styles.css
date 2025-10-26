@@ -1429,3 +1429,591 @@ html {
 body {
   overscroll-behavior-y: contain;
 }
+/* ===== OLD WEATHERED PIN BOARD ===== */
+.terminal-memory-board {
+  position: relative;
+  min-height: 700px;
+  background: 
+    /* Dark weathered cork texture */
+    radial-gradient(circle at 25% 25%, #3d2914 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, #4a3319 1px, transparent 1px),
+    radial-gradient(circle at 50% 10%, #2d1f0f 0.5px, transparent 0.5px),
+    radial-gradient(circle at 10% 90%, #3d2914 0.5px, transparent 0.5px),
+    radial-gradient(circle at 80% 40%, #4a3319 0.8px, transparent 0.8px),
+    radial-gradient(circle at 15% 60%, #2d1f0f 0.6px, transparent 0.6px),
+    /* Additional weathering spots */
+    radial-gradient(circle at 30% 70%, #1a1a1a 2px, transparent 2px),
+    radial-gradient(circle at 85% 15%, #2a2a2a 1.5px, transparent 1.5px);
+  background-color: #6b5b47; /* More natural cork brown */
+  background-size: 20px 20px, 25px 25px, 15px 15px, 18px 18px, 22px 22px, 16px 16px, 40px 40px, 35px 35px;
+  border: 12px solid #2d1f0f;
+  border-radius: 0;
+  padding: 2rem;
+  overflow: hidden;
+  box-shadow: 
+    0 15px 30px rgba(0, 0, 0, 0.8);
+}
+
+.crt-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Natural random stains - not centered */
+    radial-gradient(circle at 15% 80%, rgba(0,0,0,0.08) 0%, transparent 25%),
+    radial-gradient(circle at 85% 25%, rgba(0,0,0,0.06) 0%, transparent 20%),
+    radial-gradient(circle at 40% 15%, rgba(45,31,15,0.05) 0%, transparent 18%),
+    radial-gradient(circle at 75% 90%, rgba(0,0,0,0.04) 0%, transparent 15%),
+    /* Subtle grain texture */
+    repeating-conic-gradient(from 0deg, transparent 0deg, rgba(0,0,0,0.03) 1deg, transparent 2deg),
+    repeating-linear-gradient(45deg, transparent 0px, rgba(45,31,15,0.02) 1px, transparent 4px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Very subtle texture - no obvious patterns */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 6px,
+      rgba(0, 0, 0, 0.015) 6px,
+      rgba(0, 0, 0, 0.015) 7px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 8px,
+      rgba(45, 31, 15, 0.01) 8px,
+      rgba(45, 31, 15, 0.01) 9px
+    );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.terminal-photo {
+  position: absolute;
+  width: 200px;
+  height: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 3;
+  background: 
+    /* Aged photo paper */
+    linear-gradient(145deg, #e8e0d0 0%, #d5c8b0 100%);
+  padding: 8px;
+  padding-bottom: 20px;
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 0 30px rgba(0, 0, 0, 0.15);
+  
+  /* Realistic photo aging */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.terminal-photo:hover {
+  z-index: 15 !important;
+  transform: scale(1.03) rotate(0deg) !important;
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.8),
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.terminal-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  
+  /* Heavy vintage aging for old pin board feel */
+  filter: 
+    grayscale(100%) 
+    sepia(35%) 
+    contrast(1.3) 
+    brightness(0.75) 
+    saturate(0.6)
+    hue-rotate(15deg)
+    blur(0.4px);
+  
+  /* Heavy film grain and dust overlay */
+  background: 
+    /* Age spots */
+    radial-gradient(circle at 15% 25%, rgba(0,0,0,0.1) 0%, transparent 20%),
+    radial-gradient(circle at 85% 75%, rgba(0,0,0,0.08) 0%, transparent 15%),
+    /* Film grain */
+    repeating-conic-gradient(from 0deg, transparent 0deg, rgba(0,0,0,0.06) 1deg, transparent 2deg),
+    repeating-linear-gradient(0deg, transparent 0px, rgba(0,0,0,0.04) 1px, transparent 2px),
+    repeating-linear-gradient(90deg, transparent 0px, rgba(45,31,15,0.03) 1px, transparent 3px);
+  
+  /* Additional aging overlay */
+  position: relative;
+}
+
+.terminal-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Dust and scratches */
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 1px,
+      rgba(0, 0, 0, 0.02) 1px,
+      rgba(0, 0, 0, 0.02) 2px
+    );
+  pointer-events: none;
+}
+
+.torn-edge .faded-photo {
+  /* Torn paper effect */
+  clip-path: polygon(
+    0% 0%, 
+    95% 0%, 
+    100% 8%, 
+    98% 15%, 
+    100% 25%, 
+    97% 35%, 
+    100% 45%, 
+    95% 55%, 
+    100% 65%, 
+    98% 75%, 
+    100% 85%, 
+    95% 95%, 
+    100% 100%, 
+    0% 100%
+  );
+}
+
+.terminal-label {
+  position: absolute;
+  bottom: -35px;
+  left: 0;
+  right: 0;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 0.65rem;
+  text-align: center;
+  line-height: 1.1;
+  background: 
+    linear-gradient(145deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
+  color: #f7f7f7;
+  padding: 4px 8px;
+  border-radius: 3px;
+  border: 1px solid rgba(45, 31, 15, 0.3);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.file-name {
+  display: block;
+  color: #f7f7f7;
+  font-weight: bold;
+  margin-bottom: 1px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.file-desc {
+  display: block;
+  color: #bbb;
+  font-size: 0.6rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Thumbtacks */
+.thumbtack {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.thumbtack::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.thumbtack-red {
+  background: radial-gradient(circle, #ff4444, #cc0000);
+}
+
+.thumbtack-blue {
+  background: radial-gradient(circle, #4444ff, #0000cc);
+}
+
+.thumbtack-green {
+  background: radial-gradient(circle, #44ff44, #00cc00);
+}
+
+.thumbtack-yellow {
+  background: radial-gradient(circle, #ffff44, #cccc00);
+}
+
+/* Tape */
+.tape {
+  position: absolute;
+  background: rgba(255, 248, 220, 0.8);
+  border: 1px solid rgba(200, 200, 180, 0.6);
+  z-index: 2;
+}
+
+.tape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.05) 2px,
+      rgba(0, 0, 0, 0.05) 3px
+    );
+}
+
+.tape-top {
+  width: 60px;
+  height: 20px;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+.tape-corner {
+  width: 25px;
+  height: 25px;
+  top: -5px;
+  right: -5px;
+  transform: rotate(15deg);
+}
+
+.tape-corner-bottom {
+  width: 25px;
+  height: 25px;
+  bottom: -5px;
+  left: -5px;
+  transform: rotate(-15deg);
+}
+
+.tape-middle {
+  width: 80px;
+  height: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(1deg);
+}
+
+/* Staples */
+.staple {
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background: #666;
+  z-index: 2;
+  border-radius: 0.5px;
+}
+
+.staple::before,
+.staple::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 4px;
+  background: #666;
+  top: -1px;
+}
+
+.staple::before {
+  left: 1px;
+}
+
+.staple::after {
+  right: 1px;
+}
+
+.staple-1 {
+  top: 5px;
+  left: 5px;
+  transform: rotate(-5deg);
+}
+
+.staple-2 {
+  top: 5px;
+  right: 5px;
+  transform: rotate(5deg);
+}
+
+.staple-corner {
+  bottom: 5px;
+  right: 5px;
+  transform: rotate(45deg);
+}
+
+/* Old School Photo Viewer */
+.retro-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retro-viewer.hidden {
+  display: none;
+}
+
+.retro-viewer .viewer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.retro-viewer .viewer-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.viewer-header {
+  background: linear-gradient(to bottom, #0080ff, #0060cc);
+  color: white;
+  padding: 4px 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.viewer-title-bar {
+  font-weight: bold;
+}
+
+.retro-viewer .viewer-close {
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  color: black;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  font-weight: bold;
+  width: 20px;
+  height: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.retro-viewer .viewer-close:hover {
+  background: #e0e0e0;
+}
+
+.retro-viewer .viewer-close:active {
+  border: 1px inset #c0c0c0;
+}
+
+.retro-viewer .viewer-frame {
+  width: 600px;
+  height: 400px;
+  background: #fff;
+  margin: 8px;
+  border: 1px inset #c0c0c0;
+  overflow: hidden;
+}
+
+.retro-viewer .viewer-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+.retro-viewer .viewer-info {
+  padding: 8px;
+  background: #c0c0c0;
+  border-top: 1px inset #c0c0c0;
+}
+
+.retro-viewer .viewer-title {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.retro-viewer .viewer-description {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #333;
+  line-height: 1.3;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .bulletin-board {
+    min-height: 900px;
+    padding: 1rem;
+  }
+  
+  .old-photo {
+    width: 140px;
+  }
+  
+  .retro-viewer .viewer-frame {
+    width: 90vw;
+    height: 60vh;
+    margin: 4px;
+  }
+  
+  .handwritten-note {
+    font-size: 0.6rem;
+    bottom: -30px;
+  }
+}/* Mo
+bile Responsiveness for Terminal Memory Board */
+@media (max-width: 768px) {
+  .terminal-memory-board {
+    min-height: 900px;
+    padding: 1rem;
+  }
+  
+  .terminal-photo {
+    width: 160px;
+  }
+  
+  .terminal-label {
+    font-size: 0.6rem;
+    bottom: -35px;
+  }
+  
+  .file-name {
+    font-size: 0.6rem;
+  }
+  
+  .file-desc {
+    font-size: 0.55rem;
+  }
+  
+  .retro-viewer .viewer-frame {
+    width: 90vw;
+    height: 60vh;
+    margin: 4px;
+  }
+}/* Realist
+ic Pin Board Elements */
+.terminal-photo::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: 
+    radial-gradient(circle, #666 0%, #333 70%, #111 100%);
+  border-radius: 50%;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.8),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Alternate pin colors for variety */
+.terminal-photo:nth-child(2)::before {
+  background: radial-gradient(circle, #8B4513 0%, #654321 70%, #2d1f0f 100%);
+}
+
+.terminal-photo:nth-child(3)::before {
+  background: radial-gradient(circle, #444 0%, #222 70%, #000 100%);
+}
+
+.terminal-photo:nth-child(5)::before {
+  background: radial-gradient(circle, #666 0%, #333 70%, #111 100%);
+}
+
+.terminal-photo:nth-child(7)::before {
+  background: radial-gradient(circle, #8B4513 0%, #654321 70%, #2d1f0f 100%);
+}
+
+/* Natural wear patterns - not just corners */
+.terminal-memory-board::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Random wear spots */
+    radial-gradient(circle at 10% 20%, rgba(0,0,0,0.08) 0%, transparent 15%),
+    radial-gradient(circle at 90% 85%, rgba(0,0,0,0.06) 0%, transparent 12%),
+    radial-gradient(circle at 25% 95%, rgba(45,31,15,0.05) 0%, transparent 10%),
+    radial-gradient(circle at 80% 10%, rgba(0,0,0,0.04) 0%, transparent 8%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Photo aging and wear */
+.terminal-photo:nth-child(odd) .terminal-image {
+  /* Some photos more aged than others */
+  filter: 
+    grayscale(100%) 
+    sepia(45%) 
+    contrast(1.4) 
+    brightness(0.7) 
+    saturate(0.5)
+    hue-rotate(20deg)
+    blur(0.5px);
+}
+
+.terminal-photo:nth-child(3n) .terminal-image {
+  /* Every third photo has different aging */
+  filter: 
+    grayscale(100%) 
+    sepia(25%) 
+    contrast(1.2) 
+    brightness(0.8) 
+    saturate(0.7)
+    hue-rotate(10deg)
+    blur(0.3px);
+}

@@ -334,6 +334,136 @@
         </div>
     </section>
 
+    <!-- Terminal Memory Board -->
+    <section id="achievement-gallery" class="max-w-4xl mx-auto py-16 border-t border-gray-700">
+        <h2 class="text-4xl font-bold mb-8 text-center font-mono">ACHIEVMENTS & CERTIFICATES</h2>
+        <p class="text-center text-gray-500 mb-12 font-mono text-xs">$ ls -la /memories/achievements/</p>
+        
+        <div class="terminal-memory-board">
+            <!-- CRT scanlines overlay -->
+            <div class="crt-overlay"></div>
+            <div class="scanlines"></div>
+            
+            <!-- Row 1: Top certificates -->
+            <!-- Stanford CIP 2024 -->
+            <div class="terminal-photo" data-achievement="stanford-2024" style="top: 20px; left: 40px; transform: rotate(-1deg);">
+                <img src="assets/CIP24.png" alt="Stanford Code in Place 2024" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">Stanford Code in Place '24</span>
+                    <span class="file-desc">Section Leader</span>
+                </div>
+            </div>
+
+            <!-- TECHTRONIX Certificate -->
+            <div class="terminal-photo" data-achievement="techtronix-cert" style="top: 20px; left: 280px; transform: rotate(1deg);">
+                <img src="assets/techtronix_certificate.png" alt="TECHTRONIX 1st Place Certificate" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">TECHTRONIX '22</span>
+                    <span class="file-desc">1st Place - Speed Programming</span>
+                </div>
+            </div>
+
+            <!-- TECHTRONIX Group Photo -->
+            <div class="terminal-photo" data-achievement="techtronix-group" style="top: 20px; right: 40px; transform: rotate(-1deg);">
+                <img src="assets/techtronix_group_photo.jpeg" alt="TECHTRONIX Group Photo" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">Victory moment at TECHTRONIX</span>
+                    <span class="file-desc">National Competition</span>
+                </div>
+            </div>
+
+            <!-- Row 2: Middle photos -->
+            <!-- Confiniti MUST -->
+            <div class="terminal-photo" data-achievement="confiniti" style="top: 200px; left: 60px; transform: rotate(1deg);">
+                <img src="assets/confiniti_must.png" alt="Confiniti MUST" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">Confiniti MUST</span>
+                    <span class="file-desc">Technical Excellence</span>
+                </div>
+            </div>
+
+            <!-- President Certificate -->
+            <div class="terminal-photo" data-achievement="president-cert" style="top: 180px; right: 40px; transform: rotate(-1deg);">
+                <img src="assets/ajk_presdient_cert.jpeg" alt="President Certificate" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">University Recognition</span>
+                    <span class="file-desc">Representing MUST Nationally</span>
+                </div>
+            </div>
+
+            <!-- Row 3: Bottom section -->
+            <!-- GDSC Tech Lead -->
+            <div class="terminal-photo" data-achievement="gdsc-lead" style="top: 360px; left: 40px; transform: rotate(-1deg);">
+                <img src="assets/gdsc_tech_lead_cert.png" alt="GDSC Technical Lead" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">GDSC Technical Lead</span>
+                    <span class="file-desc">Google Developer Student Clubs</span>
+                </div>
+            </div>
+
+            <!-- Stanford CIP 2025 -->
+            <div class="terminal-photo" data-achievement="stanford-2025" style="top: 340px; left: 280px; transform: rotate(1deg);">
+                <img src="assets/CIP25.png" alt="Stanford Code in Place 2025" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">Stanford CIP '25</span>
+                    <span class="file-desc">Section Leader - 2nd Year</span>
+                </div>
+            </div>
+
+            <!-- PEC Funding Receipt Photo -->
+            <div class="terminal-photo" data-achievement="pec-funding" style="top: 320px; right: 40px; transform: rotate(-1deg);">
+                <img src="assets/pec_funding_amount_rec_photo.png" alt="PEC Funding Receipt" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">P.E.C Funded Project</span>
+                    <span class="file-desc">Innovation & Recognition</span>
+                </div>
+            </div>
+
+            <!-- Row 4: Bottom row -->
+            <!-- PEC FYP Certificate -->
+            <div class="terminal-photo" data-achievement="pec-fyp" style="top: 500px; left: 120px; transform: rotate(1deg);">
+                <img src="assets/pec_funded_fyp.jpeg" alt="PEC Funded FYP" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">PEC FYP Certificate</span>
+                    <span class="file-desc">Innovation Award</span>
+                </div>
+            </div>
+
+            <!-- President Appreciation Certificate -->
+            <div class="terminal-photo" data-achievement="president-appreciation" style="top: 480px; right: 120px; transform: rotate(-1deg);">
+                <img src="assets/cert_of_appreciation_president_AJK.png" alt="President Appreciation Certificate" class="terminal-image">
+                <div class="terminal-label">
+                    <span class="file-name">Presidential Appreciation</span>
+                    <span class="file-desc">AJK Recognition</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Old School Photo Viewer -->
+        <div id="photo-viewer" class="retro-viewer hidden">
+            <div class="viewer-overlay"></div>
+            <div class="viewer-content">
+                <div class="viewer-header">
+                    <span class="viewer-title-bar">PHOTO_VIEWER.EXE</span>
+                    <button class="viewer-close">X</button>
+                </div>
+                <div class="viewer-frame">
+                    <img id="viewer-image" src="" alt="" class="viewer-image">
+                </div>
+                <div class="viewer-info">
+                    <div class="info-text">
+                        <h3 id="viewer-title" class="viewer-title"></h3>
+                        <p id="viewer-description" class="viewer-description"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Continue with Projects Section -->
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects" class="max-w-4xl mx-auto py-16 border-t border-gray-700">
         <h2 class="text-4xl font-bold mb-12 text-center">Featured Projects</h2>

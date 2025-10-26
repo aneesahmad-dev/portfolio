@@ -223,6 +223,7 @@ function initializePortfolio() {
   initScrollProgress();
   initAdvancedFeatures();
   initTestimonialsToggle();
+  initAchievementGallery();
   initMobileMenu();
   
   // Initialize fade-in animations
@@ -530,3 +531,103 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+
+// Terminal Memory Board Gallery
+function initAchievementGallery() {
+  const photos = document.querySelectorAll('.terminal-photo');
+  const viewer = document.getElementById('photo-viewer');
+  const viewerImage = document.getElementById('viewer-image');
+  const viewerTitle = document.getElementById('viewer-title');
+  const viewerDescription = document.getElementById('viewer-description');
+  const viewerClose = document.querySelector('.viewer-close');
+  const viewerOverlay = document.querySelector('.viewer-overlay');
+  
+  if (!viewer) return;
+  
+  const achievements = {
+    'techtronix-cert': {
+      title: 'TECHTRONIX 2022 - 1st Place Certificate',
+      description: 'First place winner in National Level Speed Programming Competition at Wah University. Competed against top programmers from across Pakistan and secured victory through exceptional coding speed and accuracy.',
+      src: 'assets/techtronix_certificate.png'
+    },
+    'techtronix-group': {
+      title: 'TECHTRONIX Victory Group Photo',
+      description: 'Celebrating the victory moment at TECHTRONIX 2022 National Level Competition. This achievement led to university recognition and opened doors for future opportunities in competitive programming.',
+      src: 'assets/techtronix_group_photo.jpeg'
+    },
+    'president-cert': {
+      title: 'University President Recognition Certificate',
+      description: 'Special recognition certificate from the University President for representing MUST at national level and bringing honor to the institution through the TECHTRONIX victory.',
+      src: 'assets/ajk_presdient_cert.jpeg'
+    },
+    'pec-funding': {
+      title: 'PEC Funding Receipt Ceremony',
+      description: 'Receiving funding amount from Pakistan Engineering Council representative for our innovative Final Year Project. Our project was selected among hundreds of submissions for its practical applications and technical excellence.',
+      src: 'assets/pec_funding_amount_rec_photo.png'
+    },
+    'stanford-2024': {
+      title: 'Stanford Code in Place 2024 Certificate',
+      description: 'First year as Section Leader for Stanford University\'s CS106A programming course. Successfully mentored students through comprehensive Python curriculum and programming fundamentals.',
+      src: 'assets/CIP24.png'
+    },
+    'stanford-2025': {
+      title: 'Stanford Code in Place 2025 Certificate',
+      description: 'Second consecutive year as Section Leader for Stanford\'s prestigious Code in Place program. Continued excellence in mentoring 30+ students in programming best practices and problem-solving.',
+      src: 'assets/CIP25.png'
+    },
+    'gdsc-lead': {
+      title: 'GDSC Technical Lead Certificate',
+      description: 'Served as Technical Lead for Google Developer Student Clubs at MUST from 2022-2024. Led technical workshops, organized coding events, and mentored fellow students in mobile development and modern technologies.',
+      src: 'assets/gdsc_tech_lead_cert.png'
+    },
+    'pec-fyp': {
+      title: 'PEC Funded Final Year Project Certificate',
+      description: 'Final Year Project funded by Pakistan Engineering Council for its innovation and practical industry applications. The project demonstrated advanced software engineering principles and real-world problem solving.',
+      src: 'assets/pec_funded_fyp.jpeg'
+    },
+    'confiniti': {
+      title: 'Confiniti MUST Technical Excellence',
+      description: 'Recognition for outstanding technical performance and innovation at Mirpur University of Science & Technology. Demonstrated exceptional skills in software development and system design.',
+      src: 'assets/confiniti_must.png'
+    },
+    'president-appreciation': {
+      title: 'Presidential Appreciation Certificate - AJK',
+      description: 'Special appreciation certificate from the President of Azad Jammu & Kashmir for exceptional academic performance and bringing honor to the region through national level achievements.',
+      src: 'assets/cert_of_appreciation_president_AJK.png'
+    }
+  };
+  
+  photos.forEach(photo => {
+    photo.addEventListener('click', () => {
+      const achievementId = photo.getAttribute('data-achievement');
+      const achievement = achievements[achievementId];
+      
+      if (!achievement) return;
+      
+      viewerTitle.textContent = achievement.title;
+      viewerDescription.textContent = achievement.description;
+      viewerImage.src = achievement.src;
+      viewerImage.alt = achievement.title;
+      
+      viewer.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  // Close viewer
+  function closeViewer() {
+    viewer.classList.add('hidden');
+    document.body.style.overflow = '';
+    viewerImage.src = '';
+  }
+  
+  if (viewerClose) viewerClose.addEventListener('click', closeViewer);
+  if (viewerOverlay) viewerOverlay.addEventListener('click', closeViewer);
+  
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !viewer.classList.contains('hidden')) {
+      closeViewer();
+    }
+  });
+}
