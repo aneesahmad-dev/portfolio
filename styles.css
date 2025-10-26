@@ -1432,7 +1432,7 @@ body {
 /* ===== OLD WEATHERED PIN BOARD ===== */
 .terminal-memory-board {
   position: relative;
-  min-height: 700px;
+  min-height: 800px;
   background: 
     /* Dark weathered cork texture */
     radial-gradient(circle at 25% 25%, #3d2914 1px, transparent 1px),
@@ -1778,114 +1778,239 @@ body {
   transform: rotate(45deg);
 }
 
-/* Old School Photo Viewer */
-.retro-viewer {
+/* ===== ARCHIVE DRAWER VIEWER ===== */
+.archive-drawer {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(2px);
 }
 
-.retro-viewer.hidden {
-  display: none;
+.archive-drawer.hidden {
+  display: none !important;
 }
 
-.retro-viewer .viewer-overlay {
+.archive-drawer:not(.hidden) {
+  display: flex !important;
+}
+
+
+
+.drawer-overlay::after {
+  content: 'Tap outside to close';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.95);
-}
-
-.retro-viewer .viewer-content {
-  position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  background: #c0c0c0;
-  border: 2px outset #c0c0c0;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-}
-
-.viewer-header {
-  background: linear-gradient(to bottom, #0080ff, #0060cc);
-  color: white;
-  padding: 4px 8px;
-  font-family: 'Courier New', monospace;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cutive Mono', monospace;
   font-size: 0.8rem;
+  color: rgba(247, 247, 247, 0.7);
+  opacity: 0;
+  animation: hintFadeIn 2s ease-in-out 1s forwards;
+  text-align: center;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .drawer-overlay::after {
+    bottom: 10px;
+    font-size: 0.7rem;
+    content: 'Tap outside to close';
+  }
+}
+
+@keyframes hintFadeIn {
+  0% { opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}
+
+.drawer-content {
+  max-width: 900px;
+  max-height: 90vh;
+  width: 90%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background: #f4f1e8;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.drawer-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.drawer-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.drawer-content::-webkit-scrollbar-thumb {
+  background: #d4c4a8;
+  border-radius: 4px;
+}
+
+.drawer-content::-webkit-scrollbar-thumb:hover {
+  background: #c4b498;
+}
+
+
+
+@keyframes drawerSlideIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.drawer-handle {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 10px;
+  background: 
+    linear-gradient(145deg, #8B4513 0%, #654321 100%);
+  border-radius: 8px 8px 0 0;
+  border: 2px solid #5d4037;
+  border-bottom: none;
+}
+
+.handle-grip {
+  width: 60px;
+  height: 4px;
+  background: #3e2723;
+  margin: 4px auto;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.document-sleeve {
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.archive-stamp {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
+  background: 
+    /* Rubber stamp effect */
+    linear-gradient(45deg, rgba(139, 0, 0, 0.1) 0%, rgba(139, 0, 0, 0.05) 100%);
+  border: 2px dashed rgba(139, 0, 0, 0.3);
+  border-radius: 4px;
 }
 
-.viewer-title-bar {
+.document-number {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 1.1rem;
   font-weight: bold;
+  color: #8B0000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
 }
 
-.retro-viewer .viewer-close {
-  background: #c0c0c0;
-  border: 1px outset #c0c0c0;
-  color: black;
-  font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  font-weight: bold;
-  width: 20px;
-  height: 18px;
-  cursor: pointer;
+.archive-date {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 0.9rem;
+  color: #8B0000;
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.document-frame {
+  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: 
+    /* Document sleeve */
+    linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 248, 248, 0.9) 100%);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.05),
+    0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.retro-viewer .viewer-close:hover {
-  background: #e0e0e0;
-}
-
-.retro-viewer .viewer-close:active {
-  border: 1px inset #c0c0c0;
-}
-
-.retro-viewer .viewer-frame {
-  width: 600px;
-  height: 400px;
-  background: #fff;
-  margin: 8px;
-  border: 1px inset #c0c0c0;
-  overflow: hidden;
-}
-
-.retro-viewer .viewer-image {
-  width: 100%;
-  height: 100%;
+.archive-document {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.retro-viewer .viewer-info {
-  padding: 8px;
-  background: #c0c0c0;
-  border-top: 1px inset #c0c0c0;
+.document-info {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  border-left: 4px solid #8B4513;
 }
 
-.retro-viewer .viewer-title {
-  font-family: 'Courier New', monospace;
+.document-title {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c2c2c;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.document-description {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.archive-close {
+  align-self: center;
+  font-family: 'Cutive Mono', monospace;
   font-size: 0.9rem;
   font-weight: bold;
-  color: #000;
-  margin-bottom: 4px;
+  color: #2c2c2c;
+  background: 
+    linear-gradient(145deg, #d4c4a8 0%, #c4b498 100%);
+  border: 2px solid #8B4513;
+  border-radius: 6px;
+  padding: 0.75rem 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-.retro-viewer .viewer-description {
-  font-family: 'Courier New', monospace;
-  font-size: 0.75rem;
-  color: #333;
-  line-height: 1.3;
+.archive-close:hover {
+  background: linear-gradient(145deg, #e4d4b8 0%, #d4c4a8 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.archive-close:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Mobile Responsiveness */
@@ -1913,17 +2038,59 @@ body {
 bile Responsiveness for Terminal Memory Board */
 @media (max-width: 768px) {
   .terminal-memory-board {
-    min-height: 900px;
+    min-height: auto;
     padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    position: relative;
   }
   
   .terminal-photo {
-    width: 160px;
+    position: relative !important;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+  }
+  
+  .terminal-label {
+    font-size: 0.65rem;
+    bottom: -30px;
+    position: relative;
+    margin-top: 10px;
+  }
+  
+  .file-name {
+    font-size: 0.65rem;
+  }
+  
+  .file-desc {
+    font-size: 0.6rem;
+  }
+  
+  .retro-viewer .viewer-frame {
+    width: 90vw;
+    height: 60vh;
+    margin: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .terminal-memory-board {
+    padding: 0.5rem;
+    gap: 1.5rem;
+  }
+  
+  .terminal-photo {
+    max-width: 250px;
   }
   
   .terminal-label {
     font-size: 0.6rem;
-    bottom: -35px;
   }
   
   .file-name {
@@ -1932,12 +2099,6 @@ bile Responsiveness for Terminal Memory Board */
   
   .file-desc {
     font-size: 0.55rem;
-  }
-  
-  .retro-viewer .viewer-frame {
-    width: 90vw;
-    height: 60vh;
-    margin: 4px;
   }
 }/* Realist
 ic Pin Board Elements */
@@ -2016,4 +2177,123 @@ ic Pin Board Elements */
     saturate(0.7)
     hue-rotate(10deg)
     blur(0.3px);
+}/* 
+Archive Drawer Mobile Responsiveness */
+@media (max-width: 768px) {
+  .drawer-content {
+    width: 95%;
+    max-height: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .drawer-content {
+    width: 98%;
+    max-height: 80%;
+  }
+}
+
+/* Mobil
+e Close Area */
+.mobile-close-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-close-area {
+    display: block;
+  }
+  
+  .mobile-close-area::after {
+    content: '⌄ Swipe down or tap to close';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cutive Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    pointer-events: none;
+  }
+}/* Mobile vi
+ewport fix */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  @media (max-width: 768px) {
+    .drawer-content {
+      max-height: 80vh;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .drawer-content {
+      max-height: 75vh;
+    }
+  }
+  
+  @media (max-width: 360px) {
+    .drawer-content {
+      max-height: 70vh;
+    }
+  }
+}
+
+/* Android Chrome specific fixes */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .archive-drawer {
+    /* Account for mobile browser UI */
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for modern browsers */
+  }
+  
+  .drawer-content {
+    max-height: min(85vh, 85dvh);
+  }
+}
+
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  .drawer-content {
+    max-height: min(80vh, 80dvh);
+  }
+}
+
+@media screen and (max-width: 360px) and (orientation: portrait) {
+  .drawer-content {
+    max-height: min(75vh, 75dvh);
+  }
+}/*
+/* Prevent body scroll when modal is open */
+html.modal-open,
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Ensur
+e photos don't cause page jumps */
+.terminal-photo {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.terminal-photo * {
+  pointer-events: none;
+}
+
+.terminal-photo img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }

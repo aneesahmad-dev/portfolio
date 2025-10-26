@@ -532,15 +532,16 @@ if ('serviceWorker' in navigator) {
 }
 
 
-// Terminal Memory Board Gallery
+// Archive Drawer Gallery
 function initAchievementGallery() {
   const photos = document.querySelectorAll('.terminal-photo');
   const viewer = document.getElementById('photo-viewer');
   const viewerImage = document.getElementById('viewer-image');
   const viewerTitle = document.getElementById('viewer-title');
   const viewerDescription = document.getElementById('viewer-description');
-  const viewerClose = document.querySelector('.viewer-close');
-  const viewerOverlay = document.querySelector('.viewer-overlay');
+  const documentNumber = document.getElementById('document-number');
+  const archiveDate = document.getElementById('archive-date');
+  const viewerClose = document.querySelector('.archive-close');
   
   if (!viewer) return;
   
@@ -548,57 +549,79 @@ function initAchievementGallery() {
     'techtronix-cert': {
       title: 'TECHTRONIX 2022 - 1st Place Certificate',
       description: 'First place winner in National Level Speed Programming Competition at Wah University. Competed against top programmers from across Pakistan and secured victory through exceptional coding speed and accuracy.',
-      src: 'assets/techtronix_certificate.png'
+      src: 'assets/techtronix_certificate.png',
+      docNumber: 'DOCUMENT NO. 22-A',
+      archiveYear: 'ARCHIVED 2022'
     },
     'techtronix-group': {
       title: 'TECHTRONIX Victory Group Photo',
       description: 'Celebrating the victory moment at TECHTRONIX 2022 National Level Competition. This achievement led to university recognition and opened doors for future opportunities in competitive programming.',
-      src: 'assets/techtronix_group_photo.jpeg'
+      src: 'assets/techtronix_group_photo.jpeg',
+      docNumber: 'PHOTOGRAPH 22-B',
+      archiveYear: 'ARCHIVED 2022'
     },
     'president-cert': {
       title: 'University President Recognition Certificate',
       description: 'Special recognition certificate from the University President for representing MUST at national level and bringing honor to the institution through the TECHTRONIX victory.',
-      src: 'assets/ajk_presdient_cert.jpeg'
+      src: 'assets/ajk_presdient_cert.jpeg',
+      docNumber: 'CERTIFICATE 22-C',
+      archiveYear: 'ARCHIVED 2022'
     },
     'pec-funding': {
       title: 'PEC Funding Receipt Ceremony',
       description: 'Receiving funding amount from Pakistan Engineering Council representative for our innovative Final Year Project. Our project was selected among hundreds of submissions for its practical applications and technical excellence.',
-      src: 'assets/pec_funding_amount_rec_photo.png'
+      src: 'assets/pec_funding_amount_rec_photo.png',
+      docNumber: 'PHOTOGRAPH 24-A',
+      archiveYear: 'ARCHIVED 2024'
     },
     'stanford-2024': {
       title: 'Stanford Code in Place 2024 Certificate',
       description: 'First year as Section Leader for Stanford University\'s CS106A programming course. Successfully mentored students through comprehensive Python curriculum and programming fundamentals.',
-      src: 'assets/CIP24.png'
+      src: 'assets/CIP24.png',
+      docNumber: 'STANFORD DOC 24-B',
+      archiveYear: 'ARCHIVED 2024'
     },
     'stanford-2025': {
       title: 'Stanford Code in Place 2025 Certificate',
       description: 'Second consecutive year as Section Leader for Stanford\'s prestigious Code in Place program. Continued excellence in mentoring 30+ students in programming best practices and problem-solving.',
-      src: 'assets/CIP25.png'
+      src: 'assets/CIP25.png',
+      docNumber: 'STANFORD DOC 25-A',
+      archiveYear: 'ARCHIVED 2025'
     },
     'gdsc-lead': {
       title: 'GDSC Technical Lead Certificate',
       description: 'Served as Technical Lead for Google Developer Student Clubs at MUST from 2022-2024. Led technical workshops, organized coding events, and mentored fellow students in mobile development and modern technologies.',
-      src: 'assets/gdsc_tech_lead_cert.png'
+      src: 'assets/gdsc_tech_lead_cert.png',
+      docNumber: 'GOOGLE DOC 23-A',
+      archiveYear: 'ARCHIVED 2023'
     },
     'pec-fyp': {
       title: 'PEC Funded Final Year Project Certificate',
       description: 'Final Year Project funded by Pakistan Engineering Council for its innovation and practical industry applications. The project demonstrated advanced software engineering principles and real-world problem solving.',
-      src: 'assets/pec_funded_fyp.jpeg'
+      src: 'assets/pec_funded_fyp.jpeg',
+      docNumber: 'PEC RECORD 24-C',
+      archiveYear: 'ARCHIVED 2024'
     },
     'confiniti': {
       title: 'Confiniti MUST Technical Excellence',
       description: 'Recognition for outstanding technical performance and innovation at Mirpur University of Science & Technology. Demonstrated exceptional skills in software development and system design.',
-      src: 'assets/confiniti_must.png'
+      src: 'assets/confiniti_must.png',
+      docNumber: 'MUST DOC 23-B',
+      archiveYear: 'ARCHIVED 2023'
     },
     'president-appreciation': {
       title: 'Presidential Appreciation Certificate - AJK',
       description: 'Special appreciation certificate from the President of Azad Jammu & Kashmir for exceptional academic performance and bringing honor to the region through national level achievements.',
-      src: 'assets/cert_of_appreciation_president_AJK.png'
+      src: 'assets/cert_of_appreciation_president_AJK.png',
+      docNumber: 'AJK RECORD 24-D',
+      archiveYear: 'ARCHIVED 2024'
     }
   };
   
   photos.forEach(photo => {
-    photo.addEventListener('click', () => {
+    photo.addEventListener('click', (e) => {
+      e.preventDefault();
+      
       const achievementId = photo.getAttribute('data-achievement');
       const achievement = achievements[achievementId];
       
@@ -608,21 +631,84 @@ function initAchievementGallery() {
       viewerDescription.textContent = achievement.description;
       viewerImage.src = achievement.src;
       viewerImage.alt = achievement.title;
+      documentNumber.textContent = achievement.docNumber;
+      archiveDate.textContent = achievement.archiveYear;
       
       viewer.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
     });
   });
   
   // Close viewer
   function closeViewer() {
     viewer.classList.add('hidden');
-    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
     viewerImage.src = '';
   }
   
+  // Close on button click
   if (viewerClose) viewerClose.addEventListener('click', closeViewer);
-  if (viewerOverlay) viewerOverlay.addEventListener('click', closeViewer);
+  
+
+  
+  // Close when clicking outside the content
+  if (viewer) {
+    viewer.addEventListener('click', (e) => {
+      if (e.target === viewer) {
+        closeViewer();
+      }
+    });
+  }
+  
+  // Prevent closing when clicking inside the drawer content
+  const drawerContent = document.querySelector('.drawer-content');
+  if (drawerContent) {
+    drawerContent.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+  }
+  
+  // Add swipe down to close on mobile
+  let startY = 0;
+  let currentY = 0;
+  let isDragging = false;
+  
+  if (drawerContent) {
+    drawerContent.addEventListener('touchstart', (e) => {
+      startY = e.touches[0].clientY;
+      isDragging = true;
+    });
+    
+    drawerContent.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      currentY = e.touches[0].clientY;
+      const deltaY = currentY - startY;
+      
+      // Only allow swipe down when at top of scroll
+      if (drawerContent.scrollTop === 0 && deltaY > 0) {
+        e.preventDefault();
+        const progress = Math.min(deltaY / 200, 1);
+        drawerContent.style.transform = `translateY(${deltaY * 0.5}px)`;
+        drawerContent.style.opacity = 1 - progress * 0.3;
+      }
+    });
+    
+    drawerContent.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      
+      const deltaY = currentY - startY;
+      
+      if (deltaY > 100) {
+        // Swipe down threshold reached - close drawer
+        closeViewer();
+      } else {
+        // Snap back
+        drawerContent.style.transform = '';
+        drawerContent.style.opacity = '';
+      }
+    });
+  }
   
   // Close on Escape key
   document.addEventListener('keydown', (e) => {
