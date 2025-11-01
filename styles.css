@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Inconsolata:wght@400;700&display=swap');
 
-/* Ensure font-display: swap for all fonts */
-@font-face {
-  font-family: 'Cutive Mono';
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inconsolata';
-  font-display: swap;
-}
-
 /* Base Styles */
 :root {
   --bg-primary: #0d0d0d;
@@ -487,31 +476,45 @@ h1, h2, h3 {
   animation-delay: -4s;
 }
 
-/* Experience Timeline */
+/* Terminal-Style Experience Timeline */
 .experience-timeline {
   position: relative;
-  padding-left: 2rem;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-family: 'Cutive Mono', monospace;
+  backdrop-filter: blur(5px);
 }
 
 .experience-timeline::before {
-  content: '';
+  content: '$ history | grep "career"';
   position: absolute;
-  left: 0.75rem;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--accent-color), rgba(255, 255, 255, 0.3));
+  top: -0.5rem;
+  left: 1rem;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  padding: 0 0.5rem;
+  font-family: 'Cutive Mono', monospace;
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   opacity: 0;
-  transform: translateX(-50px);
-  animation: slideInFromLeft 0.8s ease forwards;
+  transform: translateX(-20px);
+  animation: slideInFromLeft 0.6s ease forwards;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .timeline-item:nth-child(1) { animation-delay: 0.1s; }
@@ -520,43 +523,67 @@ h1, h2, h3 {
 .timeline-item:nth-child(4) { animation-delay: 0.4s; }
 
 .timeline-dot {
-  position: absolute;
-  left: -2rem;
-  top: 0.25rem;
-  width: 12px;
-  height: 12px;
-  background: var(--accent-color);
-  border-radius: 50%;
-  border: 3px solid var(--bg-primary);
-  box-shadow: 0 0 0 2px var(--accent-color);
+  position: relative;
+  top: 0.1rem;
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+  box-shadow: none;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  font-weight: bold;
+  min-width: 2rem;
+  text-align: left;
 }
+
+/* Terminal prompt indicators */
+.timeline-item:nth-child(1) .timeline-dot::before { content: '>>'; }
+.timeline-item:nth-child(2) .timeline-dot::before { content: '>>'; }
+.timeline-item:nth-child(3) .timeline-dot::before { content: '>>'; }
+.timeline-item:nth-child(4) .timeline-dot::before { content: '>>'; }
 
 .timeline-content {
   flex: 1;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  border-left: 3px solid var(--accent-color);
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border-left: none;
   transition: all 0.3s ease;
 }
 
 .timeline-content:hover {
-  background: rgba(255, 255, 255, 0.08);
-  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.03);
+  transform: translateX(2px);
+  padding-left: 0.5rem;
+  border-radius: 4px;
 }
 
 .timeline-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   color: var(--accent-color);
   margin-bottom: 0.25rem;
   font-family: 'Cutive Mono', monospace;
+  position: relative;
+}
+
+.timeline-title::before {
+  content: '[EXEC] ';
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  opacity: 0.7;
 }
 
 .timeline-desc {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
   line-height: 1.4;
+  font-family: 'Inconsolata', monospace;
+  padding-left: 0.5rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  margin-left: 0.5rem;
 }
 
 /* Education Section */
@@ -1267,11 +1294,41 @@ textarea:focus-visible {
   }
   
   .experience-timeline {
-    padding-left: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .experience-timeline::before {
+    font-size: 0.7rem;
+    top: -0.4rem;
+    left: 0.75rem;
+  }
+  
+  .timeline-item {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
   }
   
   .timeline-dot {
-    left: -1.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: auto;
+  }
+  
+  .timeline-content {
+    margin-left: 1.5rem;
+  }
+  
+  .timeline-title {
+    font-size: 0.9rem;
+  }
+  
+  .timeline-desc {
+    font-size: 0.8rem;
+    margin-left: 0;
+    padding-left: 0.25rem;
+    border-left-width: 1px;
   }
   
   .skills-list, .experience-highlight {
