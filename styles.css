@@ -1005,15 +1005,15 @@ h1, h2, h3 {
   padding: 0.75rem 2rem;
 }
 
-/* Initially hide testimonials 3 and 4 */
-.testimonials-container .testimonial-card[data-testimonial="3"],
-.testimonials-container .testimonial-card[data-testimonial="4"] {
+/* Initially show only first 2 testimonials */
+.testimonials-container > .testimonial-card[data-testimonial="3"],
+.testimonials-container > .testimonial-card[data-testimonial="4"],
+.testimonials-container > .testimonial-card[data-testimonial="5"] {
   display: none !important;
 }
 
-/* Show testimonials 3 and 4 when show-all class is added */
-.testimonials-container.show-all .testimonial-card[data-testimonial="3"],
-.testimonials-container.show-all .testimonial-card[data-testimonial="4"] {
+/* Show all testimonials when show-all class is added */
+.testimonials-container.show-all > .testimonial-card {
   display: flex !important;
   animation: fadeInUp 0.6s ease forwards;
   opacity: 1 !important;
@@ -1520,18 +1520,37 @@ body {
 .terminal-memory-board {
   position: relative;
   min-height: 800px;
-  background: 
-    /* Simplified cork texture - fewer gradients */
-    radial-gradient(circle at 25% 25%, #3d2914 1px, transparent 1px),
-    radial-gradient(circle at 75% 75%, #4a3319 1px, transparent 1px),
-    radial-gradient(circle at 30% 70%, #1a1a1a 2px, transparent 2px);
-  background-color: #6b5b47;
-  background-size: 20px 20px, 25px 25px, 40px 40px;
   border: 12px solid #2d1f0f;
   border-radius: 0;
   padding: 2rem;
   overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6); /* Reduced shadow complexity */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Background image with vintage filters */
+.terminal-memory-board::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('assets/home.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* Vintage black and white photo filters with heavy grain */
+  filter: 
+    grayscale(100%)           /* Convert to black and white */
+    contrast(200%)            /* Very high contrast creates visible grain */
+    brightness(0.7)           /* Darker to enhance grain visibility */
+    saturate(0%)              /* Remove any color */
+    blur(0px);                /* Avoid filter blur (janky on scroll) */
+  z-index: 0;
+  pointer-events: none;
+  /* Add texture overlay for grain effect */
+  opacity: 0.95;
 }
 
 .crt-overlay {
@@ -1541,9 +1560,16 @@ body {
   right: 0;
   bottom: 0;
   background: 
-    /* Simplified stains - fewer gradients */
-    radial-gradient(circle at 15% 80%, rgba(0,0,0,0.06) 0%, transparent 25%),
-    radial-gradient(circle at 85% 25%, rgba(0,0,0,0.04) 0%, transparent 20%);
+    /* Grainy texture for old photo effect */
+    repeating-radial-gradient(circle at 20% 30%, transparent 0, rgba(255,255,255,0.03) 1px, transparent 2px),
+    repeating-radial-gradient(circle at 60% 70%, transparent 0, rgba(0,0,0,0.03) 1px, transparent 2px),
+    repeating-radial-gradient(circle at 80% 20%, transparent 0, rgba(255,255,255,0.02) 1px, transparent 2px),
+    /* Dark overlay for better readability */
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    /* Vintage stains and aging */
+    radial-gradient(circle at 15% 80%, rgba(0,0,0,0.1) 0%, transparent 25%),
+    radial-gradient(circle at 85% 25%, rgba(0,0,0,0.08) 0%, transparent 20%);
+  background-size: 3px 3px, 4px 4px, 2px 2px, 100% 100%, 100% 100%, 100% 100%;
   pointer-events: none;
   z-index: 1;
 }
@@ -1554,17 +1580,13 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    /* Single subtle texture */
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 8px,
-      rgba(0, 0, 0, 0.01) 8px,
-      rgba(0, 0, 0, 0.01) 9px
-    );
+  /* SVG noise filter for authentic TV static grain */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
   pointer-events: none;
   z-index: 2;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
 }
 
 .terminal-photo {
@@ -1574,6 +1596,9 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 3;
+  contain: layout paint;
+  transform: translateZ(0);
+  will-change: transform;
   background: 
     /* Aged photo paper */
     linear-gradient(145deg, #e8e0d0 0%, #d5c8b0 100%);
@@ -1601,6 +1626,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  transform: translateZ(0);
   
   /* Simplified vintage aging - fewer filters */
   filter: 
@@ -2222,7 +2248,7 @@ ic Pin Board Elements */
     brightness(0.7) 
     saturate(0.5)
     hue-rotate(20deg)
-    blur(0.5px);
+    blur(0px);
 }
 
 .terminal-photo:nth-child(3n) .terminal-image {
@@ -2234,7 +2260,7 @@ ic Pin Board Elements */
     brightness(0.8) 
     saturate(0.7)
     hue-rotate(10deg)
-    blur(0.3px);
+    blur(0px);
 }/* 
 Archive Drawer Mobile Responsiveness */
 @media (max-width: 768px) {

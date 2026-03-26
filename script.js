@@ -115,51 +115,54 @@ function initScrollProgress() {
   
   if (!progressBar) return;
 
-  let isScrollLocked = false;
   let ticking = false;
+  let lastDocHeight = 0;
+
+  const getDocHeight = () => {
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    // Avoid division by 0 on very short pages
+    return Math.max(docHeight, 1);
+  };
 
   const updateScrollProgress = () => {
     const scrollTop = window.pageYOffset;
-    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const docHeight = lastDocHeight || getDocHeight();
     const scrollPercent = (scrollTop / docHeight) * 100;
     
     // Cap the progress at 100%
     const cappedPercent = Math.min(scrollPercent, 100);
     
-    // Batch DOM updates
-    requestAnimationFrame(() => {
-      progressBar.style.width = cappedPercent + '%';
+    // DOM updates (already called within rAF)
+    progressBar.style.width = cappedPercent + '%';
 
-      // Add visual feedback when complete
-      if (cappedPercent >= 100) {
-        progressBar.classList.add('complete');
+    // Add visual feedback when complete
+    if (cappedPercent >= 100) {
+      progressBar.classList.add('complete');
+    } else {
+      progressBar.classList.remove('complete');
+    }
+
+    // Show/hide back to top button
+    if (backToTopBtn) {
+      if (scrollTop > 300) {
+        backToTopBtn.classList.remove('hidden');
       } else {
-        progressBar.classList.remove('complete');
+        backToTopBtn.classList.add('hidden');
       }
-
-      // Show/hide back to top button
-      if (backToTopBtn) {
-        if (scrollTop > 300) {
-          backToTopBtn.classList.remove('hidden');
-        } else {
-          backToTopBtn.classList.add('hidden');
-        }
-      }
-    });
-
-    // Lock scrolling when progress reaches 100%
-    if (scrollPercent >= 100 && !isScrollLocked) {
-      isScrollLocked = true;
-      window.scrollTo({
-        top: docHeight,
-        behavior: 'smooth'
-      });
-    } else if (scrollPercent < 99) {
-      isScrollLocked = false;
     }
     
     ticking = false;
   };
+
+  // Cache doc height up-front and keep it fresh on resize/content changes
+  const refreshDocHeight = () => {
+    lastDocHeight = getDocHeight();
+  };
+  refreshDocHeight();
+  window.addEventListener('resize', () => {
+    // Avoid resize storms causing sync layout thrash
+    requestAnimationFrame(refreshDocHeight);
+  }, { passive: true });
 
   window.addEventListener('scroll', () => {
     if (!ticking) {
@@ -168,27 +171,9 @@ function initScrollProgress() {
     }
   }, { passive: true });
 
-  // Prevent wheel scrolling when at 100%
-  window.addEventListener('wheel', (e) => {
-    const scrollTop = window.pageYOffset;
-    const docHeight = document.body.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    
-    // Prevent scrolling down when at 100%
-    if (scrollPercent >= 99 && e.deltaY > 0) {
-      e.preventDefault();
-      // Ensure we're exactly at the bottom
-      window.scrollTo({
-        top: docHeight,
-        behavior: 'smooth'
-      });
-    }
-  }, { passive: false });
-
   // Back to top functionality
   if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
-      isScrollLocked = false; // Allow scrolling when going back to top
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
