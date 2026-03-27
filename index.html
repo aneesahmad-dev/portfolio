@@ -1,1 +1,828 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/portfolio/images/logo.png"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Portfolio Website"/><link rel="apple-touch-icon" href="/portfolio/images/logo.png"/><link rel="manifest" href="/portfolio/manifest.json"/><title>Portfolio Website</title><script defer="defer" src="/portfolio/static/js/main.097e6dca.js"></script><link href="/portfolio/static/css/main.1f6a4542.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anees Ahmad - Software Architect & Flutter Developer. Experienced in mobile development, system design, and technical leadership.">
+    <meta name="keywords" content="Flutter Developer, Software Architect, Mobile Development, Dart, Android, iOS">
+    <meta name="author" content="Anees Ahmad">
+    <meta name="google-site-verification" content="mxdm9TJJFv72PT_MaPYrSyngNJMzSUEJiMdm0u2t4MM" />
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Anees Ahmad | Software Architect & Mobile Developer">
+    <meta property="og:description" content="Experienced Flutter developer and software architect specializing in mobile applications and system design.">
+    <meta property="og:url" content="https://aneesahmad-dev.github.io/portfolio/">
+    
+    <title>Anees Ahmad | Software Architect & Mobile Developer Portfolio</title>
+    
+    <!-- Font optimization -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Inconsolata:wght@400;700&family=Playfair+Display:wght@700;900&family=Inter:wght@400;500&display=swap" as="style">
+    
+    <!-- Critical resources -->
+    <link rel="preload" href="styles.css?v=20260326-1" as="style">
+    
+    <!-- Performance and SEO -->
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260326-1">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Anees Ahmad",
+      "jobTitle": "Software Architect & Flutter Developer",
+      "description": "Experienced Flutter developer and software architect specializing in mobile applications and system design",
+      "url": "https://aneesahmad-dev.github.io/portfolio/",
+      "sameAs": [
+        "https://www.linkedin.com/in/anees-ahmad1/",
+        "https://github.com/Anees004",
+        "https://leetcode.com/Anees-Ahmad/"
+      ],
+      "knowsAbout": ["Flutter", "Dart", "Mobile Development", "Software Architecture", "System Design"],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Mirpur University of Science & Technology"
+      }
+    }
+    </script>
+</head>
+<body class="p-4 md:p-8">
+    <!-- Loading Screen -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">
+            Loading portfolio...
+        </div>
+    </div>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="scroll-progress"></div>
+
+    <!-- Header / Navigation -->
+    <header class="max-w-4xl mx-auto flex justify-between items-center py-6 border-b border-gray-700" role="banner">
+        <div class="header-brand">
+            <div class="text-2xl font-bold" aria-label="Anees Ahmad Portfolio">ANEES AHMAD</div>
+            <div class="brand-subtitle">Software Architect & Mobile Developer</div>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <nav role="navigation" aria-label="Main navigation" class="classic-nav hidden md:flex">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#education" class="nav-link">Education</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        
+        <!-- Mobile Hamburger Menu -->
+        <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1" aria-label="Toggle mobile menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="mobile-nav hidden" role="navigation" aria-label="Mobile navigation">
+            <a href="#about" class="mobile-nav-link">About</a>
+            <a href="#education" class="mobile-nav-link">Education</a>
+            <a href="#projects" class="mobile-nav-link">Projects</a>
+            <a href="#contact" class="mobile-nav-link">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section (The Old Vibe Meets 3D Modernity) -->
+    <section class="max-w-4xl mx-auto text-center py-20 md:py-32">
+        <div class="data-crystal-container">
+            <!-- Animated 3D element: Data Crystal / Neural Node -->
+            <div class="data-crystal">
+                <div class="face front"></div>
+                <div class="face back"></div>
+                <div class="face right"></div>
+                <div class="face left"></div>
+                <div class="face top"></div>
+                <div class="face bottom"></div>
+            </div>
+        </div>
+
+        <h1 class="hero-name mt-8 mb-4 tracking-wide">
+            Anees Ahmad
+        </h1>
+        <p class="hero-role mb-4">Flutter Developer & Software Architect</p>
+        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed" style="font-family: 'Inconsolata', monospace;">
+            Building cross-platform mobile apps that scale — from architecture to App Store.
+        </p>
+
+        <div class="hero-cta-group">
+            <a href="#projects" class="classic-button inline-block px-8 py-4 text-sm">
+                View My Work
+            </a>
+            <a href="#contact" class="classic-button-secondary inline-block px-8 py-4 text-sm">
+                Hire Me
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="max-w-4xl mx-auto py-16 section-border" aria-labelledby="about-heading">
+        <h2 id="about-heading" class="text-4xl font-bold mb-12 text-center">About Me</h2>
+        
+        <!-- Profile and Bio Layout -->
+        <div class="flex flex-col lg:flex-row gap-12 items-start mb-12">
+            <!-- Left Side: Photo and Quick Info -->
+            <div class="lg:w-1/3">
+                <div class="profile-card">
+                    <img src="assets/profile_old.png" alt="Anees Ahmad - Software Architect" class="profile-image" loading="lazy">
+                    <div class="profile-overlay">
+                        <!-- <h3 class="profile-name">Anees Ahmad</h3>
+                        <p class="profile-role">Flutter Developer & Software Architect</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">5★</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">L1</span>
+                                <span class="stat-label">Seller</span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Detailed Information -->
+            <div class="lg:w-2/3 space-y-8">
+                <!-- Core Expertise -->
+                <div>
+                    <h3 class="text-2xl mb-4 text-gray-200">Core Expertise</h3>
+                    <p class="text-gray-300 leading-relaxed text-base mb-6">
+                        My foundation lies in formal Software Engineering principles, focusing on clean architecture, scalable systems, and robust design patterns like MVVM/BLoC. I design systems to handle complexity and deliver high performance, specializing in cross-platform mobile development.
+                    </p>
+                    <div class="skills-grid">
+                        <div class="skill-tag">Flutter & Dart</div>
+                        <div class="skill-tag">Android Development</div>
+                        <div class="skill-tag">System Architecture</div>
+                        <div class="skill-tag">Technical Leadership</div>
+                        <div class="skill-tag">Firebase & Cloud</div>
+                        <div class="skill-tag">MVVM/BLoC Patterns</div>
+                    </div>
+                </div>
+
+                <!-- Leadership & Experience -->
+                <div>
+                    <h3 class="text-2xl mb-4 text-gray-200">Leadership & Experience</h3>
+                    <p class="text-gray-300 leading-relaxed text-base mb-6">
+                        I am a dedicated Flutter Engineer and a proven leader, having served as a Technical Lead for GDSC and as a Section Leader for Stanford's Code in Place program, where I mentored 30+ students. I combine technical depth with effective team management and mentorship.
+                    </p>
+                    <div class="experience-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4 class="timeline-title">Stanford Code in Place Section Leader</h4>
+                                <p class="timeline-desc">Mentored 30+ students in Stanford's CS106A programming course, providing guidance on Python fundamentals and problem-solving</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4 class="timeline-title">GDSC Technical Lead</h4>
+                                <p class="timeline-desc">Leading technical workshops and mentoring developers in mobile development</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4 class="timeline-title">Fiverr Level 1 Seller</h4>
+                                <p class="timeline-desc">15+ projects completed with 5-star rating for Flutter mobile applications</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4 class="timeline-title">Programming Competition Winner</h4>
+                                <p class="timeline-desc">First position in National Level TECHTRONIX 22 WEC competition</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="max-w-4xl mx-auto py-16 border-t border-gray-700">
+        <h2 class="text-4xl font-bold mb-12 text-center">Education & Credentials</h2>
+        <div class="education-grid">
+            <!-- Main Degree -->
+            <div class="education-card degree-card">
+                <div class="education-header">
+                    <div class="degree-icon">BS</div>
+                    <div>
+                        <h3 class="education-title">Bachelor of Science</h3>
+                        <h4 class="education-subtitle">Software Engineering</h4>
+                        <div class="education-date">Graduation: Sep 2024</div>
+                    </div>
+                </div>
+                
+                <div class="institution-info">
+                    <div class="institution-name">MIRPUR UNIVERSITY OF SCIENCE & TECHNOLOGY</div>
+                    <div class="institution-details">(MUST) • Pakistan</div>
+                    <div class="gpa-highlight">
+                        <span class="gpa-label">CGPA:</span>
+                        <span class="gpa-value">3.85/4.0</span>
+                        <span class="gpa-grade">First Class Honors</span>
+                    </div>
+                </div>
+                
+                <div class="coursework-section">
+                    <h5 class="coursework-title">Core Coursework</h5>
+                    <div class="coursework-tags">
+                        <span class="course-tag">Software Design & Architecture</span>
+                        <span class="course-tag">Data Structures & Algorithms</span>
+                        <span class="course-tag">Operating Systems</span>
+                        <span class="course-tag">Cloud Computing</span>
+                        <span class="course-tag">Database Systems</span>
+                        <span class="course-tag">Software Engineering Principles</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stanford Code in Place -->
+            <div class="education-card stanford-card">
+                <div class="education-header">
+                    <div class="stanford-logo">S</div>
+                    <div>
+                        <h3 class="education-title">Stanford Code in Place</h3>
+                        <h4 class="education-subtitle">Section Leader</h4>
+                        <div class="education-date">2024 & 2025</div>
+                    </div>
+                </div>
+                
+                <div class="stanford-info">
+                    <div class="stanford-description">
+                        <strong>Stanford University's CS106A Programming Course</strong>
+                        <br>Selected as Section Leader for Stanford's prestigious free online programming course based on CS106A curriculum.
+                    </div>
+                    
+                    <div class="mentorship-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">30+</span>
+                            <span class="stat-desc">Students Mentored</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <span class="stat-desc">Weeks of Leadership</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-desc">Completion Rate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="responsibilities-section">
+                    <h5 class="responsibilities-title">Key Responsibilities</h5>
+                    <ul class="responsibilities-list">
+                        <li><strong>Weekly Discussion Sections:</strong> Led interactive programming sessions covering Python fundamentals</li>
+                        <li><strong>Personalized Mentoring:</strong> Provided detailed feedback on assignments and coding projects</li>
+                        <li><strong>Peer Learning Facilitation:</strong> Organized group problem-solving and collaborative coding sessions</li>
+                        <li><strong>Technical Support:</strong> Assisted students with debugging and programming best practices</li>
+                    </ul>
+                </div>
+            </div><!-- end stanford-card -->
+
+            <!-- Achievements & Recognition -->
+            <div class="education-card achievements-card">
+                <div class="education-header">
+                    <div class="achievement-icon">★</div>
+                    <div>
+                        <h3 class="education-title">Technical Achievements</h3>
+                        <h4 class="education-subtitle">Leadership & Recognition</h4>
+                        <div class="education-date">2022 - Present</div>
+                    </div>
+                </div>
+                
+                <div class="achievements-grid">
+                    <div class="achievement-item">
+                        <div class="achievement-badge gdsc-badge">GDSC</div>
+                        <div class="achievement-content">
+                            <h6 class="achievement-name">Technical Lead</h6>
+                            <p class="achievement-desc">Google Developer Student Clubs MUST</p>
+                            <span class="achievement-period">Sep 2022 - Sep 2024</span>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-item">
+                        <div class="achievement-badge fiverr-badge">5★</div>
+                        <div class="achievement-content">
+                            <h6 class="achievement-name">Level 1 Seller</h6>
+                            <p class="achievement-desc">Fiverr Flutter Development</p>
+                            <span class="achievement-period">15+ Projects Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="achievement-item">
+                        <div class="achievement-badge competition-badge">1st</div>
+                        <div class="achievement-content">
+                            <h6 class="achievement-name">Programming Champion</h6>
+                            <p class="achievement-desc">TECHTRONIX 22 WEC National</p>
+                            <span class="achievement-period">Speed Programming</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terminal Memory Board -->
+    <section id="achievement-gallery" class="max-w-4xl mx-auto py-16 border-t border-gray-700">
+        <h2 class="text-4xl font-bold mb-8 text-center font-mono">ACHIEVMENTS & CERTIFICATES</h2>
+        <p class="text-center text-gray-500 mb-12 font-mono text-xs">$ ls -la /memories/achievements/</p>
+        
+        <div class="terminal-memory-board">
+            <!-- CRT scanlines overlay -->
+            <div class="crt-overlay"></div>
+            <div class="scanlines"></div>
+            
+            <!-- Row 1: Top certificates -->
+            <!-- Stanford CIP 2024 -->
+            <div class="terminal-photo" data-achievement="stanford-2024" style="top: 20px; left: 40px; transform: rotate(-1deg);">
+                <img src="assets/CIP24.png" alt="Stanford Code in Place 2024" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">Stanford Code in Place '24</span>
+                    <span class="file-desc">Section Leader</span>
+                </div>
+            </div>
+
+            <!-- TECHTRONIX Certificate -->
+            <div class="terminal-photo" data-achievement="techtronix-cert" style="top: 20px; left: 300px; transform: rotate(1deg);">
+                <img src="assets/techtronix_certificate.png" alt="TECHTRONIX 1st Place Certificate" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">TECHTRONIX '22</span>
+                    <span class="file-desc">1st Place - Speed Programming</span>
+                </div>
+            </div>
+
+            <!-- TECHTRONIX Group Photo -->
+            <div class="terminal-photo" data-achievement="techtronix-group" style="top: 20px; right: 40px; transform: rotate(-1deg);">
+                <img src="assets/techtronix_group_photo.jpeg" alt="TECHTRONIX Group Photo" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">Victory moment at TECHTRONIX</span>
+                    <span class="file-desc">National Competition</span>
+                </div>
+            </div>
+
+            <!-- Row 2: Left side stack -->
+            <!-- Confiniti MUST -->
+            <div class="terminal-photo" data-achievement="confiniti" style="top: 240px; left: 60px; transform: rotate(1deg);">
+                <img src="assets/confiniti_must.png" alt="Confiniti MUST" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">Confiniti MUST</span>
+                    <span class="file-desc">Technical Excellence</span>
+                </div>
+            </div>
+
+            <!-- GDSC Tech Lead -->
+            <div class="terminal-photo" data-achievement="gdsc-lead" style="top: 420px; left: 40px; transform: rotate(-1deg);">
+                <img src="assets/gdsc_tech_lead_cert.png" alt="GDSC Technical Lead" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">GDSC Technical Lead</span>
+                    <span class="file-desc">Google Developer Student Clubs</span>
+                </div>
+            </div>
+
+            <!-- Row 2: Center -->
+            <!-- Stanford CIP 2025 -->
+            <div class="terminal-photo" data-achievement="stanford-2025" style="top: 260px; left: 320px; transform: rotate(1deg);">
+                <img src="assets/CIP25.png" alt="Stanford Code in Place 2025" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">Stanford CIP '25</span>
+                    <span class="file-desc">Section Leader - 2nd Year</span>
+                </div>
+            </div>
+
+            <!-- Row 2: Right side stack -->
+            <!-- President Certificate -->
+            <div class="terminal-photo" data-achievement="president-cert" style="top: 240px; right: 40px; transform: rotate(-1deg);">
+                <img src="assets/ajk_presdient_cert.jpeg" alt="President Certificate" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">University Recognition</span>
+                    <span class="file-desc">Representing MUST Nationally</span>
+                </div>
+            </div>
+
+            <!-- PEC Funding Receipt Photo -->
+            <div class="terminal-photo" data-achievement="pec-funding" style="top: 420px; right: 40px; transform: rotate(-1deg);">
+                <img src="assets/pec_funding_amount_rec_photo.png" alt="PEC Funding Receipt" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">P.E.C Funded Project</span>
+                    <span class="file-desc">Innovation & Recognition</span>
+                </div>
+            </div>
+
+            <!-- Row 4: Bottom row -->
+            <!-- PEC FYP Certificate -->
+            <div class="terminal-photo" data-achievement="pec-fyp" style="top: 600px; left: 160px; transform: rotate(1deg);">
+                <img src="assets/pec_funded_fyp.jpeg" alt="PEC Funded FYP" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">PEC FYP Certificate</span>
+                    <span class="file-desc">Innovation Award</span>
+                </div>
+            </div>
+
+            <!-- President Appreciation Certificate -->
+            <div class="terminal-photo" data-achievement="president-appreciation" style="top: 580px; right: 160px; transform: rotate(-1deg);">
+                <img src="assets/cert_of_appreciation_president_AJK.png" alt="President Appreciation Certificate" class="terminal-image" loading="lazy" decoding="async" fetchpriority="low">
+                <div class="terminal-label">
+                    <span class="file-name">Presidential Appreciation</span>
+                    <span class="file-desc">AJK Recognition</span>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- Continue with Projects Section -->
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="max-w-4xl mx-auto py-16 border-t border-gray-700">
+        <h2 class="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+        
+        <div class="projects-grid">
+        <article class="project-card mb-10 p-6 rounded-lg">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-2xl text-white transition-all duration-300">Unify Experiences</h3>
+                <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">Social Platform • Live on Stores</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">// Technology Stack: Flutter, Socket.io, FCM, Deep Linking, Custom Backend</p>
+            <p class="text-gray-400 leading-relaxed mb-4">
+                A comprehensive social platform featuring <strong>real-time chat using sockets</strong>, private messaging, chat rooms, in-room posts and events, and <strong>deep linking for seamless sharing</strong>. Includes advanced features like <strong>FCM notifications</strong>, room highlights, album sharing, bookmarks, and much more for enhanced user engagement.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="project-tag">Flutter</span>
+                <span class="project-tag">Socket.io</span>
+                <span class="project-tag">FCM</span>
+                <span class="project-tag">Deep Linking</span>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="https://play.google.com/store/apps/details?id=com.unify.rooms" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Download Unify Experiences from Google Play Store">[ GOOGLE PLAY ]</a>
+                <a href="https://apps.apple.com/us/app/unify-experiences/id6523422163?ign-itscg=30200&ign-itsct=apps_box_link&mttnsubad=6523422163" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Download Unify Experiences from App Store">[ APP STORE ]</a>
+            </div>
+        </article>
+
+        <!-- Project 2: Swipe Duel (Flutter) -->
+        <article class="project-card mb-10 p-6 rounded-lg">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-2xl text-white transition-all duration-300">SwipeDuel</h3>
+                <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">Social Ranking • Live on Stores</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">// Technology Stack: Flutter, Provider State Management, Deep Linking, FCM Notifications</p>
+            <p class="text-gray-400 leading-relaxed mb-4">
+                A social ranking platform for cities where users compete in exciting duels by voting between two profiles. Features include <strong>point-based ranking system</strong>, city-wide leaderboards, event participation, and <strong>social media integration</strong> with TikTok & Instagram sharing. Users can create profiles, filter rankings by city/gender/events, and compete for top positions in their community with <strong>clean, maintainable code architecture</strong>.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="project-tag">Flutter</span>
+                <span class="project-tag">Provider</span>
+                <span class="project-tag">Deep Linking</span>
+                <span class="project-tag">FCM</span>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="https://swipeduel.app/" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Visit SwipeDuel website">[ WEBSITE ]</a>
+                <a href="https://play.google.com/store/apps/details?id=app.swipeduel" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Download SwipeDuel from Google Play Store">[ GOOGLE PLAY ]</a>
+                <a href="https://apps.apple.com/us/app/swipeduel/id6748925699" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Download SwipeDuel from App Store">[ APP STORE ]</a>
+            </div>
+        </article>
+
+        <!-- Project 3: MedXplain (Flutter + Gemini) -->
+        <article class="project-card mb-10 p-6 rounded-lg">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-2xl text-white transition-all duration-300">MedXplain</h3>
+                <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">AI Health Briefs • Hackathon</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">// Technology Stack: Flutter, BLoC, Firebase Auth, Firestore, Gemini API</p>
+            <p class="text-gray-400 leading-relaxed mb-4">
+                Turn confusing medical reports into <strong>clear, personalized health summaries</strong>. Users can scan or upload PDFs/images, then get AI-generated briefs that highlight <strong>abnormal values</strong>, key findings, and suggested questions for a doctor visit — with a <strong>simple vs. clinical</strong> viewing mode.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="project-tag">Flutter</span>
+                <span class="project-tag">BLoC</span>
+                <span class="project-tag">Firebase</span>
+                <span class="project-tag">Firestore</span>
+                <span class="project-tag">Gemini</span>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="https://devpost.com/software/myhealth-brief?ref_content=user-portfolio&ref_feature=in_progress" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="View MedXplain project on Devpost">[ DEVPOST ]</a>
+            </div>
+        </article>
+
+        <!-- Project 4: Warehouse Labels (iPad • SwiftUI) -->
+        <article class="project-card mb-10 p-6 rounded-lg">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-2xl text-white transition-all duration-300">Warehouse Labels</h3>
+                <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">iPad Warehouse Ops • Hybrid Native</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">// Technology Stack: Swift, SwiftUI, WKWebView, Network.framework, TSPL, LocalAuthentication, Keychain</p>
+            <p class="text-gray-400 leading-relaxed mb-4">
+                An iPad-focused warehouse operations app built as a hybrid native shell around an existing web platform. It intercepts in-web print actions, generates <strong>TSPL thermal labels</strong> (optional <strong>Code 128 barcode</strong>), and sends them directly to a network printer over <strong>TCP/IP (port 9100)</strong>. Includes <strong>Touch ID / Face ID</strong> assisted admin password autofill with secure storage in <strong>Keychain</strong>, plus printer diagnostics and fallback AirPrint/PDF workflows.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="project-tag">SwiftUI</span>
+                <span class="project-tag">WKWebView</span>
+                <span class="project-tag">Thermal Printing</span>
+                <span class="project-tag">TSPL</span>
+                <span class="project-tag">Touch ID / Face ID</span>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="https://pedidos.almacenfiesta.com/admin/home" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Open the warehouse web platform used inside the app">[ WEB PLATFORM ]</a>
+                <a href="https://github.com/Anees004/ios-direct-printing" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="View the direct printing reference project on GitHub">[ PRINTING REPO ]</a>
+            </div>
+        </article>
+
+        <!-- Project 5: Titan Transfers (iOS + Android) -->
+        <article class="project-card mb-10 p-6 rounded-lg">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-2xl text-white transition-all duration-300">Titan Transfers: Luxury Ride</h3>
+                <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">Travel • Airport Transfers</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">// Key features: Fixed pricing, Meet & Greet, Flight tracking, Hourly chauffeur, Multi-class fleet</p>
+            <p class="text-gray-400 leading-relaxed mb-4">
+                A premium mobility app for <strong>airport door-to-door transfers</strong> and <strong>hourly chauffeur service</strong> across 100+ destinations. Includes <strong>Meet &amp; Greet</strong>, real-time <strong>flight tracking</strong>, transparent <strong>fixed pricing</strong>, free cancellation (up to 24h), and a fleet for every budget (Economy → First Class, plus Vans &amp; SUVs).
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="project-tag">Airport Transfers</span>
+                <span class="project-tag">Chauffeur</span>
+                <span class="project-tag">Flight Tracking</span>
+                <span class="project-tag">Fixed Pricing</span>
+                <span class="project-tag">Travel</span>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="https://titantransfers.com/" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Visit Titan Transfers website">[ WEBSITE ]</a>
+                <a href="https://play.google.com/store/apps/details?id=com.titantransfers.app" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Download Titan Transfers from Google Play Store">[ GOOGLE PLAY ]</a>
+                <a href="https://apps.apple.com/us/app/titan-transfers-luxury-ride/id6759010305" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Download Titan Transfers from the App Store">[ APP STORE ]</a>
+            </div>
+        </article>
+
+        <!-- Project 3: FreshUp (Flutter) -->
+        <!-- <article class="project-card mb-10 p-6 rounded-lg">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-2xl text-white transition-all duration-300">FreshUp</h3>
+                <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">Lifestyle App • Live on Store</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">// Technology Stack: Flutter, Clean Architecture, State Management, Cross-platform</p>
+            <p class="text-gray-400 leading-relaxed mb-4">
+                A comprehensive lifestyle application developed with <strong>Flutter's clean architecture principles</strong>. The app focuses on user experience with smooth navigation, responsive design, and efficient state management. Built with <strong>scalable code structure</strong> and modern development practices for optimal performance across iOS and Android platforms.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="project-tag">Flutter</span>
+                <span class="project-tag">Clean Architecture</span>
+                <span class="project-tag">State Management</span>
+                <span class="project-tag">Cross-platform</span>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="https://apps.apple.com/nz/app/freshup/id1668802018?platform=iphone" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Download FreshUp from App Store">[ APP STORE ]</a>
+            </div>
+        </article> -->
+
+        <!-- Project 4: Barber Booking App (Flutter) -->
+        <article class="project-card mb-10 p-6 rounded-lg">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-2xl text-white transition-all duration-300">Barber Booking App (FreshUp)</h3>
+                <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">Service Booking</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">// Technology Stack: Flutter, RESTful API, Firebase, Hive Caching, MVC, Stripe</p>
+            <p class="text-gray-400 leading-relaxed mb-4">
+                Full-stack mobile application with Barber, Customer, and Admin access levels. Designed using the <strong>MVC architecture</strong> for clean code. Features include secure authentication, service list display, <strong>booking system</strong>, <strong>online payment (Stripe)</strong>, and local data caching via <strong>Hive</strong> for performance.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="project-tag">Flutter</span>
+                <span class="project-tag">MVC</span>
+                <span class="project-tag">Stripe</span>
+                <span class="project-tag">Hive Cache</span>
+            </div>
+             <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="https://apps.apple.com/nz/app/freshup/id1668802018?platform=iphone" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="Download FreshUp from App Store">[ APP STORE ]</a>
+            </div>
+        </article>
+        
+        <!-- Project 5: Trading Journal App (Android Java) -->
+        <article class="project-card mb-10 p-6 rounded-lg">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-2xl text-white transition-all duration-300">Trading Journal</h3>
+                <span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">Financial Tool</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-4">// Technology Stack: Android Java, XML, Room Database, MVVM Architecture</p>
+            <p class="text-gray-400 leading-relaxed mb-4">
+                A native Android app implementing a trading journal. Follows the <strong>MVVM Architecture</strong> for structured development. Features include comprehensive trade recording, various charts and statistics for <strong>trade analysis</strong>, and graphical display of monthly gains with professional data visualization.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="project-tag">Android</span>
+                <span class="project-tag">MVVM</span>
+                <span class="project-tag">Room DB</span>
+                <span class="project-tag">Analytics</span>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-700">
+                <a href="https://www.linkedin.com/posts/anees-ahmad1_tradingjournal-androidapp-mvvmarchitecture-activity-7105313455754113024-_BXy?utm_source=share&utm_medium=member_desktop&rcm=ACoAADn1mkQBr7kX4bVLpeQ40dLWA7ZQBQz3BaA" target="_blank" class="text-gray-200 hover:text-white text-sm underline mr-4 focus-visible:focus transition-colors duration-200" aria-label="View Trading Journal project on LinkedIn">[ VIEW ON LINKEDIN ]</a>
+            </div>
+        </article>
+        </div><!-- end projects-grid -->
+    </section>
+    <section id="testimonials" class="max-w-4xl mx-auto py-16 border-t border-gray-700">
+        <h2 class="text-4xl font-bold mb-12 text-center">Client Testimonials</h2>
+        
+        <div class="testimonials-container">
+            <!-- Testimonial 1 - David Lian (USA) -->
+            <div class="testimonial-card" data-testimonial="1">
+                <div class="testimonial-header">
+                    <div class="client-avatar">DL</div>
+                    <div class="client-info">
+                        <h4 class="client-name">David Lian</h4>
+                        <p class="client-details">Unify Experiences • USA</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">
+                        "I highly recommend Anees. He has deep understanding of flutter and can get things done very quickly with great understanding. It is very easy to work with him."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 - Linus (Germany) -->
+            <div class="testimonial-card" data-testimonial="2">
+                <div class="testimonial-header">
+                    <div class="client-avatar">L</div>
+                    <div class="client-info">
+                        <h4 class="client-name">Linus</h4>
+                        <p class="client-details">Swipe Duel • Germany</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">
+                        <span class="testimonial-preview">
+                            "Outstanding Flutter Developer – Highly Recommended! Working with Anees was an absolute pleasure. From the very beginning, he understood exactly what I needed..."
+                        </span>
+                        <span class="testimonial-full hidden">
+                            "Outstanding Flutter Developer – Highly Recommended! Working with Anees was an absolute pleasure. From the very beginning, he understood exactly what I needed and delivered a flawless Flutter app with clean code, modern design, and smooth functionality. What really stood out was his communication – always fast, clear, and professional. He responded quickly to messages and implemented changes almost instantly. He even suggested improvements that added real value to the final product. If you're looking for a reliable, skilled, and proactive Flutter developer, Anees is the one. I'll definitely work with him again on future projects. Thank you for the excellent work!"
+                        </span>
+                    </p>
+                    <button class="see-more-btn" onclick="toggleTestimonial(2)">See More</button>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 - Henri Joel (France) -->
+            <div class="testimonial-card" data-testimonial="3">
+                <div class="testimonial-header">
+                    <div class="client-avatar">HJ</div>
+                    <div class="client-info">
+                        <h4 class="client-name">Henri Joel</h4>
+                        <p class="client-details">Freshup • France</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">
+                        "Anees Ahmad exceeded expectations with an OUTSTANDING delivery in mobile app development. His attention to detail and code expertise ensure high-quality results. Professional, reliable, and highly recommended for any Flutter project."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Testimonial 4 - ukeriddoch (UK) -->
+            <div class="testimonial-card" data-testimonial="4">
+                <div class="testimonial-header">
+                    <div class="client-avatar">UK</div>
+                    <div class="client-info">
+                        <h4 class="client-name">ukeriddoch</h4>
+                        <p class="client-details">Trading Journal • UK</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">
+                        "Was a pleasure to work with Anees. Gave regular updates throughout the project, and was adaptable to some changes during the process. Would highly recommend."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Testimonial 5 - Jose (Panama) -->
+            <div class="testimonial-card" data-testimonial="5">
+                <div class="testimonial-header">
+                    <div class="client-avatar">J</div>
+                    <div class="client-info">
+                        <h4 class="client-name">Jose</h4>
+                        <p class="client-details">Warehouse Labels (Direct Print) • Panama • almacenfiesta</p>
+                        <div class="rating">★★★★★</div>
+                    </div>
+                </div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">
+                        "Amazing work ! A very detailed person ! Everything went out smooth and perfect !"
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Show More/Less Button -->
+        <div class="testimonials-controls">
+            <button id="show-more-testimonials" class="classic-button">Show All Testimonials</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-4xl mx-auto py-16 border-t border-gray-700">
+        <h2 class="text-4xl font-bold mb-12 text-center">Get In Touch</h2>
+        <div class="bg-gray-800 p-8 rounded-lg">
+            <p class="text-gray-300 mb-8 text-lg text-center">
+                Ready to bring your ideas to life? Let's create something extraordinary together.
+            </p>
+            <form id="contact-form" action="https://formspree.io/f/xeorywdo" method="POST">
+                
+                <!-- Hidden field to specify your email -->
+                <input type="hidden" name="_to" value="aneesahmad00423@gmail.com">
+                <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission">
+                <input type="hidden" name="_next" value="https://aneesahmad-dev.github.io/portfolio/success.html">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" name="name" placeholder="NAME (REQUIRED)" required class="w-full bg-gray-900 border border-gray-700 p-3 rounded-md focus:border-white focus:outline-none">
+                    <input type="email" name="email" placeholder="EMAIL (REQUIRED)" required class="w-full bg-gray-900 border border-gray-700 p-3 rounded-md focus:border-white focus:outline-none">
+                </div>
+                <input type="text" name="subject" placeholder="SUBJECT (OPTIONAL)" class="w-full bg-gray-900 border border-gray-700 p-3 rounded-md mt-6 focus:border-white focus:outline-none">
+                <textarea name="message" placeholder="MESSAGE/PROJECT DETAILS" rows="5" required class="w-full bg-gray-900 border border-gray-700 p-3 rounded-md mt-6 focus:border-white focus:outline-none"></textarea>
+                <button type="submit" class="classic-button w-full px-8 py-4 mt-6 text-lg font-medium border-2 border-white hover:bg-white hover:text-black transition duration-300">
+                    Send Message
+                </button>
+            </form>
+            <p id="message-status" class="mt-4 text-center text-sm hidden"></p>
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top hidden" aria-label="Back to top">
+        <span>↑</span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="max-w-4xl mx-auto text-center py-12 text-gray-400 border-t border-gray-700 mt-16">
+        <p class="mb-6 text-lg">Let's create something extraordinary together.</p>
+        <div class="flex justify-center space-x-8 text-base mb-6">
+            <a href="http://github.com/Anees004" target="_blank" class="hover:text-white transition duration-300">GitHub</a>
+            <a href="https://www.linkedin.com/in/anees-ahmad1/" target="_blank" class="hover:text-white transition duration-300">LinkedIn</a>
+            <a href="https://leetcode.com/Anees-Ahmad/" target="_blank" class="hover:text-white transition duration-300">LeetCode</a>
+            <!-- <a href="https://aneesahmad-dev.github.io/portfolio/" target="_blank" class="hover:text-white transition duration-300">Previous Portfolio</a> -->
+        </div>
+        <p class="text-sm text-gray-500">
+            Available for freelance projects • <span class="text-white">Fiverr Level 1 Seller: itxaneesahmad</span> • 15+ Projects • 5★ Rating
+        </p>
+    </footer>
+
+
+
+    <!-- Archive Drawer Viewer - Direct child of body -->
+    <div id="photo-viewer" class="archive-drawer hidden" role="dialog" aria-modal="true">
+        <div class="drawer-content">
+            <!-- Archive Drawer Handle -->
+            <div class="drawer-handle">
+                <div class="handle-grip"></div>
+            </div>
+            
+            <!-- Document Sleeve -->
+            <div class="document-sleeve">
+                <!-- Archive Stamp -->
+                <div class="archive-stamp">
+                    <span id="document-number" class="document-number">DOCUMENT NO. 74-A</span>
+                    <span id="archive-date" class="archive-date">ARCHIVED 1974</span>
+                </div>
+                
+                <!-- Document Frame -->
+                <div class="document-frame">
+                    <img id="viewer-image" src="" alt="" class="archive-document">
+                </div>
+                
+                <!-- Document Info -->
+                <div class="document-info">
+                    <h3 id="viewer-title" class="document-title"></h3>
+                    <p id="viewer-description" class="document-description"></p>
+                </div>
+                
+                <!-- Close Button -->
+                <button class="archive-close">[CLOSE DRAWER]</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+
+</body>
+</html>
